@@ -1,26 +1,296 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 淺色紙感刊物 — 偏白、乾淨 */
+  --paper: #f7f4ef;
+  --paper-elevated: #fffcf7;
+  --paper-muted: #ebe6dc;
+  --ink: #1c1b19;
+  --ink-soft: #3f3c37;
+  --muted: #7a756c;
+  --line: #e0dad0;
+  --line-strong: #cfc6b8;
+  --accent: #5c4a3a;
+  --accent-hover: #3d3128;
+  --danger-soft: #8b4a3a;
+  --shadow-soft: 0 12px 40px rgba(28, 27, 25, 0.06);
+  --radius: 2px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-elevated: var(--paper-elevated);
+  --color-paper-muted: var(--paper-muted);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --font-serif: var(--font-newsreader);
+  --font-sans: var(--font-figtree);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--paper);
+  background-image: radial-gradient(
+    ellipse 120% 80% at 50% -10%,
+    #ffffff 0%,
+    transparent 55%
+  );
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-figtree), system-ui, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 紙紋：淡、乾淨，略帶紙質即可 */
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+body::after {
+  display: none;
+}
+
+::selection {
+  background: #ddd4c4;
+  color: var(--ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 標題一律刊物襯線 */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-newsreader), "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.container-page {
+  width: min(1120px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.container-narrow {
+  width: min(680px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.container-reading {
+  width: min(640px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+/* 按鈕 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius);
+  transition:
+    background 180ms ease-out,
+    color 180ms ease-out,
+    border-color 180ms ease-out,
+    transform 150ms ease-out;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+}
+
+.btn-ghost:hover {
+  border-color: var(--ink);
+  background: var(--paper-elevated);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--paper);
+  border: 1px solid var(--accent);
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* 標籤 */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prose-dc {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.prose-dc p + p {
+  margin-top: 1.25rem;
+}
+
+/* 影像敘事幀 */
+.frame-panel {
+  position: relative;
+  min-height: min(78vh, 720px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.frame-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(28, 27, 25, 0.55) 0%,
+    rgba(28, 27, 25, 0.12) 45%,
+    rgba(28, 27, 25, 0.05) 100%
+  );
+}
+
+.frame-caption {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 28rem;
+  font-family: var(--font-newsreader), serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+  line-height: 1.25;
+  color: #f6f3ed;
+}
+
+.tone-warm {
+  background: linear-gradient(145deg, #e9e0d2 0%, #c2a88a 42%, #6e5846 100%);
+}
+
+.tone-earth {
+  background: linear-gradient(160deg, #efe8dc 0%, #b7a48d 40%, #5a4e43 100%);
+}
+
+.tone-cool {
+  background: linear-gradient(135deg, #e7e8e4 0%, #a8b2b0 45%, #4a5558 100%);
+}
+
+.tone-ink {
+  background: linear-gradient(150deg, #e4dfd7 0%, #9a948a 38%, #2c2a27 100%);
+}
+
+/* 進場 */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise-in 500ms ease-out both;
+}
+
+.rise-delay-1 {
+  animation-delay: 80ms;
+}
+
+.rise-delay-2 {
+  animation-delay: 160ms;
+}
+
+.rise-delay-3 {
+  animation-delay: 240ms;
+}
+
+/* 付費鎖 */
+.lock-fade {
+  position: relative;
+}
+
+.lock-fade::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  background: linear-gradient(to bottom, transparent, var(--paper) 75%);
+  pointer-events: none;
+}
+
+/* 卡片 */
+.card-paper {
+  background: var(--paper-elevated);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  transition:
+    border-color 180ms ease-out,
+    transform 200ms ease-out;
+}
+
+.card-paper:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  border: 0;
 }

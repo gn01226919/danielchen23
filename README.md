@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# danielchen23.com
 
-## Getting Started
+Daniel Chen · **23 Perspectives**  
+視角型 Mentor 個人站：淺色紙感刊物 × 影像敘事 × 付費訂閱（前端先行）。
 
-First, run the development server:
+## 開發
 
 ```bash
+cd /Users/danielcitybarber/gork/danielchen23
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+開啟 [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 目前狀態（前端）
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 首頁影像敘事、文案區塊
+- Perspectives 列表／單篇（mock 資料）
+- 免費文全文、會員文付費牆 UI
+- Subscribe 月／年方案（結帳示意，未接 Stripe）
+- About、Work with me 表單示意
 
-## Learn More
+## 下一階段（後端）
 
-To learn more about Next.js, take a look at the following resources:
+- Supabase：文章 CMS、會員狀態
+- Stripe：付費訂閱與 webhook
+- 真實圖片替換漸層佔位
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 定位備註
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 角色：Mentor（分享＋放手），不是教練
+- 23 = 萌芽
+- 產品名：23 Perspectives
