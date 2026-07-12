@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { getContent } from "@/lib/cms/store";
 
-export default async function TechPreviewHome() {
+const base = "/v/tech";
+
+export default async function TechHomePage() {
   const content = await getContent();
   const { settings, home, narrativeFrames } = content;
   const featured = content.articles
@@ -10,27 +12,6 @@ export default async function TechPreviewHome() {
 
   return (
     <>
-      <header className="tech-header">
-        <div className="tech-wrap tech-header__inner">
-          <Link href="/v/tech" className="tech-logo">
-            <strong>{settings.siteName}</strong>
-            <span>23 · {settings.product}</span>
-          </Link>
-          <nav className="tech-nav">
-            <Link href="/perspectives">Perspectives</Link>
-            <Link href="/about">About</Link>
-            <Link href="/subscribe">Subscribe</Link>
-            <Link href="/work-with-me">Work with me</Link>
-          </nav>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            <span className="tech-badge-live">preview</span>
-            <Link href="/subscribe" className="tech-btn tech-btn-primary">
-              訂閱
-            </Link>
-          </div>
-        </div>
-      </header>
-
       <section className="tech-hero">
         <div className="tech-wrap tech-hero__grid">
           <div>
@@ -39,12 +20,15 @@ export default async function TechPreviewHome() {
             </p>
             <h1>{settings.tagline}</h1>
             <p className="tech-hero__body">{home.heroBody}</p>
-            <p className="tech-hero__quote">{settings.mentorEnglish}</p>
+            <p className="tech-quote">{settings.mentorEnglish}</p>
             <div className="tech-hero__actions">
-              <Link href="/subscribe" className="tech-btn tech-btn-primary">
+              <Link href={`${base}/subscribe`} className="tech-btn tech-btn-primary">
                 {home.heroCtaPrimary}
               </Link>
-              <Link href="/perspectives" className="tech-btn tech-btn-ghost">
+              <Link
+                href={`${base}/perspectives`}
+                className="tech-btn tech-btn-ghost"
+              >
                 {home.heroCtaSecondary}
               </Link>
             </div>
@@ -63,35 +47,34 @@ export default async function TechPreviewHome() {
                 <span className="cmd">whoami</span>
               </div>
               <div className="out">{settings.siteName} · mentor</div>
-              <div style={{ height: "0.65rem" }} />
+              <div style={{ height: "0.55rem" }} />
               <div>
                 <span className="dim">$</span>{" "}
                 <span className="cmd">cat ./mission.md</span>
               </div>
               <div className="out">{settings.mentorTagline}</div>
               <div className="dim"># lead the path · share perspective</div>
-              <div style={{ height: "0.65rem" }} />
+              <div style={{ height: "0.55rem" }} />
               <div>
                 <span className="dim">$</span>{" "}
                 <span className="cmd">echo $MANTRA</span>
               </div>
-              <div className="out">{settings.mentorEnglish}</div>
-              <div style={{ height: "0.65rem" }} />
+              <div className="kw">{settings.mentorEnglish}</div>
+              <div style={{ height: "0.55rem" }} />
               <div>
                 <span className="dim">$</span>{" "}
                 <span className="cmd">./grow --with-ai --from-field</span>
               </div>
-              <div className="dim">✓ brand · growth · leverage</div>
+              <div className="out">✓ brand · growth · leverage</div>
               <div>
-                <span className="dim">$</span>{" "}
-                <span className="cmd">_</span>
+                <span className="dim">$</span> <span className="cmd">_</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="tech-stats tech-wrap" style={{ width: "min(1120px, 100%)" }}>
+      <div className="tech-stats">
         <div className="tech-stat">
           <div className="tech-stat__label">Role</div>
           <div className="tech-stat__value">Mentor</div>
@@ -124,7 +107,7 @@ export default async function TechPreviewHome() {
         <div className="tech-wrap">
           <p className="tech-section__label">Signals</p>
           <h2>視角模組 · 四則現場訊號</h2>
-          <p className="lead">對應主站影像敘事句——科技版改成 bento 資訊卡。</p>
+          <p className="lead">現場洞見，編成可掃的資訊卡。</p>
           <div className="tech-bento">
             {narrativeFrames.map((frame, i) => (
               <div className="tech-card" key={frame.id}>
@@ -154,15 +137,18 @@ export default async function TechPreviewHome() {
               <h2>{home.featuredTitle}</h2>
               <p className="lead">{home.featuredSubtitle}</p>
             </div>
-            <Link href="/perspectives" className="tech-btn tech-btn-ghost">
+            <Link
+              href={`${base}/perspectives`}
+              className="tech-btn tech-btn-ghost"
+            >
               全部文章 →
             </Link>
           </div>
-          <div className="tech-bento" style={{ marginTop: "2rem" }}>
+          <div className="tech-bento">
             {featured.map((article) => (
               <Link
                 key={article.slug}
-                href={`/perspectives/${article.slug}`}
+                href={`${base}/perspectives/${article.slug}`}
                 className="tech-card"
               >
                 <div className="tech-card__idx">{article.date}</div>
@@ -191,7 +177,7 @@ export default async function TechPreviewHome() {
           <h2>{home.aboutTitle}</h2>
           <p className="lead">{home.aboutBody}</p>
           <div style={{ marginTop: "1.25rem" }}>
-            <Link href="/about" className="tech-btn tech-btn-ghost">
+            <Link href={`${base}/about`} className="tech-btn tech-btn-ghost">
               {home.aboutCta}
             </Link>
           </div>
@@ -201,7 +187,10 @@ export default async function TechPreviewHome() {
               <h2>{home.subscribeTitle}</h2>
               <p>{home.subscribeSubtitle}</p>
             </div>
-            <Link href="/subscribe" className="tech-btn tech-btn-primary">
+            <Link
+              href={`${base}/subscribe`}
+              className="tech-btn tech-btn-primary"
+            >
               {home.subscribeCta}
             </Link>
           </div>
@@ -211,29 +200,15 @@ export default async function TechPreviewHome() {
               <h2>{home.collabTitle}</h2>
               <p>{home.collabBody}</p>
             </div>
-            <Link href="/work-with-me" className="tech-btn tech-btn-ghost">
+            <Link
+              href={`${base}/work-with-me`}
+              className="tech-btn tech-btn-ghost"
+            >
               {home.collabCta}
             </Link>
           </div>
         </div>
       </section>
-
-      <footer className="tech-footer">
-        <div className="tech-wrap tech-footer__row">
-          <div>
-            <div style={{ color: "var(--t-text)", marginBottom: "0.35rem" }}>
-              {settings.siteName}
-            </div>
-            <div>{settings.footerLine}</div>
-          </div>
-          <div style={{ textAlign: "right" }}>
-            <div>Tech template preview · not production theme</div>
-            <div style={{ marginTop: "0.35rem" }}>
-              <Link href="/">使用紙感主站 →</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

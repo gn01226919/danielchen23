@@ -10,8 +10,8 @@ const previews = [
   {
     href: "/v/tech",
     code: "A",
-    name: "科技感",
-    desc: "深色網格 · 終端機面板 · 青藍強調 · builder 產品站。",
+    name: "科技感（完整站）",
+    desc: "深色網格 · 終端機 · 高對比程式碼色字 · 全頁路由已 build。",
   },
   {
     href: "/v/hybrid",
