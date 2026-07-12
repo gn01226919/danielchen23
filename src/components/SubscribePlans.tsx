@@ -13,13 +13,40 @@ export function SubscribePlans({
   benefits: string[];
 }) {
   const [plan, setPlan] = useState<PlanId>("yearly");
-  const [status, setStatus] = useState<"idle" | "pending" | "mock">("idle");
+  const [status, setStatus] = useState<"idle" | "pending" | "err">("idle");
+  const [err, setErr] = useState<string | null>(null);
 
   const selected = pricing[plan];
 
-  function handleCheckout() {
+  async function handleCheckout() {
     setStatus("pending");
-    window.setTimeout(() => setStatus("mock"), 700);
+    setErr(null);
+    try {
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan }),
+      });
+      const data = (await res.json()) as {
+        url?: string;
+        error?: string;
+        code?: string;
+      };
+
+      if (res.status === 401 || data.code === "AUTH_REQUIRED") {
+        window.location.href = `/login?next=${encodeURIComponent("/subscribe")}`;
+        return;
+      }
+      if (!res.ok || !data.url) {
+        setErr(data.error || "無法開始結帳（可能尚未設定 Stripe）");
+        setStatus("err");
+        return;
+      }
+      window.location.href = data.url;
+    } catch {
+      setErr("無法開始結帳");
+      setStatus("err");
+    }
   }
 
   return (
@@ -35,6 +62,7 @@ export function SubscribePlans({
               onClick={() => {
                 setPlan(id);
                 setStatus("idle");
+                setErr(null);
               }}
               className={`relative border p-6 text-left transition-colors duration-150 ${
                 active
@@ -75,14 +103,12 @@ export function SubscribePlans({
           onClick={handleCheckout}
           disabled={status === "pending"}
         >
-          {status === "pending" ? "準備結帳…" : "前往付費訂閱"}
+          {status === "pending" ? "前往 Stripe…" : "登入後付費訂閱"}
         </button>
-        {status === "mock" && (
-          <p className="mt-4 text-sm leading-relaxed text-muted">
-            前端示意已就緒。支付流程（Stripe）與會員權限會在後端階段接上；
-            目前不會實際扣款。
-          </p>
-        )}
+        {err && <p className="mt-4 text-sm text-[#8b4a3a]">{err}</p>}
+        <p className="mt-4 text-xs text-muted">
+          結帳由 Stripe 處理。未登入會先導向註冊／登入（含 Google）。
+        </p>
       </div>
     </div>
   );

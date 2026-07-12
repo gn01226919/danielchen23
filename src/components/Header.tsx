@@ -8,6 +8,7 @@ const nav = [
   { href: "/perspectives", label: "Perspectives" },
   { href: "/about", label: "About" },
   { href: "/subscribe", label: "Subscribe" },
+  { href: "/contact", label: "Contact" },
   { href: "/work-with-me", label: "Work with me" },
 ] as const;
 
@@ -49,6 +50,12 @@ export function Header({
               </Link>
             );
           })}
+          <Link
+            href="/account"
+            className="text-sm text-muted transition-colors hover:text-ink"
+          >
+            帳戶
+          </Link>
           <Link href="/subscribe" className="btn btn-primary !py-2 !px-4 text-sm">
             訂閱
           </Link>
@@ -88,6 +95,20 @@ export function Header({
             {mentorTagline && (
               <p className="py-2 text-xs text-muted">{mentorTagline}</p>
             )}
+            <Link
+              href="/account"
+              className="py-3 text-base text-ink-soft"
+              onClick={() => setOpen(false)}
+            >
+              帳戶
+            </Link>
+            <Link
+              href="/contact"
+              className="py-3 text-base text-ink-soft"
+              onClick={() => setOpen(false)}
+            >
+              Contact
+            </Link>
             <Link
               href="/subscribe"
               className="btn btn-primary mt-2"

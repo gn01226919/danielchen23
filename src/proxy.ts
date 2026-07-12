@@ -1,3 +1,4 @@
+import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createHmac, timingSafeEqual } from "crypto";
@@ -17,7 +18,7 @@ function sign(value: string) {
   return createHmac("sha256", secret()).update(value).digest("hex");
 }
 
-function isValidSession(raw: string | undefined): boolean {
+function isValidAdminSession(raw: string | undefined): boolean {
   if (!raw) return false;
   const [payload, sig] = raw.split(".");
   if (!payload || !sig) return false;
@@ -37,29 +38,57 @@ function isValidSession(raw: string | undefined): boolean {
   return true;
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  let response = NextResponse.next({
+    request: { headers: request.headers },
+  });
+
+  // Supabase session 刷新（anon key only；secret 不進 proxy 邏輯以外）
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (supabaseUrl && anon) {
+    const supabase = createServerClient(supabaseUrl, anon, {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
+          );
+          response = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, options),
+          );
+        },
+      },
+    });
+    await supabase.auth.getUser();
+  }
 
   if (!pathname.startsWith("/admin")) {
-    return NextResponse.next();
+    return response;
   }
 
   if (pathname === "/admin/login") {
-    if (isValidSession(request.cookies.get(COOKIE)?.value)) {
+    if (isValidAdminSession(request.cookies.get(COOKIE)?.value)) {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
-    return NextResponse.next();
+    return response;
   }
 
-  if (!isValidSession(request.cookies.get(COOKIE)?.value)) {
+  if (!isValidAdminSession(request.cookies.get(COOKIE)?.value)) {
     const login = new URL("/admin/login", request.url);
     login.searchParams.set("next", pathname);
     return NextResponse.redirect(login);
   }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

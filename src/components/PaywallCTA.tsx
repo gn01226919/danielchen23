@@ -14,8 +14,11 @@ export function PaywallCTA({ compact = false }: { compact?: boolean }) {
         訂閱後可讀會員文章與決策脈絡。
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
-        <Link href="/subscribe" className="btn btn-primary">
-          訂閱 23 Perspectives
+        <Link href="/login?next=/subscribe" className="btn btn-primary">
+          登入／註冊後訂閱
+        </Link>
+        <Link href="/subscribe" className="btn btn-ghost">
+          查看方案
         </Link>
         <Link href="/perspectives" className="btn btn-ghost">
           看免費文章

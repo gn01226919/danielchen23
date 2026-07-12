@@ -3,12 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PaywallCTA } from "@/components/PaywallCTA";
 import { getContent } from "@/lib/cms/store";
+import { canReadFullArticle } from "@/lib/server/membership";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   const content = await getContent();
-  return content.articles.map((a) => ({ slug: a.slug }));
+  // 僅預渲公開文；會員文走動態授權
+  return content.articles
+    .filter((a) => a.free && a.published)
+    .map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -28,7 +32,9 @@ export default async function ArticlePage({ params }: Props) {
   const article = content.articles.find((a) => a.slug === slug && a.published);
   if (!article) notFound();
 
-  const locked = !article.free;
+  // Server 裁定：不可只靠前端藏全文
+  const allowed = await canReadFullArticle(article.free);
+  const locked = !allowed;
   const visibleBody = locked ? article.body.slice(0, 2) : article.body;
 
   return (
@@ -46,7 +52,7 @@ export default async function ArticlePage({ params }: Props) {
             <time dateTime={article.date}>{article.date}</time>
             <span aria-hidden>·</span>
             <span>{article.readMinutes} 分鐘</span>
-            {locked && (
+            {!article.free && (
               <>
                 <span aria-hidden>·</span>
                 <span className="text-accent">會員文章</span>

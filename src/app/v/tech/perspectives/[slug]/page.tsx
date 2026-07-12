@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getContent } from "@/lib/cms/store";
+import { canReadFullArticle } from "@/lib/server/membership";
 
 type Props = { params: Promise<{ slug: string }> };
 const base = "/v/tech";
 
 export async function generateStaticParams() {
   const content = await getContent();
-  return content.articles.map((a) => ({ slug: a.slug }));
+  return content.articles
+    .filter((a) => a.free && a.published)
+    .map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -24,7 +27,8 @@ export default async function TechArticlePage({ params }: Props) {
   const article = content.articles.find((a) => a.slug === slug && a.published);
   if (!article) notFound();
 
-  const locked = !article.free;
+  const allowed = await canReadFullArticle(article.free);
+  const locked = !allowed;
   const visible = locked ? article.body.slice(0, 2) : article.body;
 
   return (
@@ -81,10 +85,13 @@ export default async function TechArticlePage({ params }: Props) {
               }}
             >
               <Link
-                href={`${base}/subscribe`}
+                href="/login?next=/subscribe"
                 className="tech-btn tech-btn-primary"
               >
-                訂閱 23 Perspectives
+                登入後訂閱
+              </Link>
+              <Link href="/subscribe" className="tech-btn tech-btn-ghost">
+                方案
               </Link>
               <Link
                 href={`${base}/perspectives`}
