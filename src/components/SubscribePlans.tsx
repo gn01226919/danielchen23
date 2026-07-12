@@ -1,18 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { pricing } from "@/data/site";
+import type { SiteContent } from "@/lib/cms/types";
 
 type PlanId = "monthly" | "yearly";
 
-export function SubscribePlans() {
+export function SubscribePlans({
+  pricing,
+  benefits,
+}: {
+  pricing: SiteContent["pricing"];
+  benefits: string[];
+}) {
   const [plan, setPlan] = useState<PlanId>("yearly");
   const [status, setStatus] = useState<"idle" | "pending" | "mock">("idle");
 
   const selected = pricing[plan];
 
   function handleCheckout() {
-    // 前端示意：之後接 Stripe Checkout
     setStatus("pending");
     window.setTimeout(() => setStatus("mock"), 700);
   }
@@ -60,9 +65,9 @@ export function SubscribePlans() {
           {selected.period}
         </p>
         <ul className="mt-5 space-y-2 text-sm text-ink-soft">
-          <li>· 會員 Perspectives 全文</li>
-          <li>· 品牌、成長、AI 與現場決策視角</li>
-          <li>· Mentor 式分享——不是教練作業</li>
+          {benefits.map((b) => (
+            <li key={b}>· {b}</li>
+          ))}
         </ul>
         <button
           type="button"
@@ -78,9 +83,6 @@ export function SubscribePlans() {
             目前不會實際扣款。
           </p>
         )}
-        <p className="mt-4 text-xs text-muted">
-          價格為佔位數字，上線前可再調整。取消與退款政策接支付後補上。
-        </p>
       </div>
     </div>
   );

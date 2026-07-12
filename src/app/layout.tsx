@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Figtree, Newsreader } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -23,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s · Daniel Chen",
   },
   description:
-    "視角型 Mentor。分享品牌、成長與 AI 的實戰洞見——點亮方向，放手讓你自己長。23 Perspectives 訂閱。",
+    "視角型 Mentor。分享品牌、成長與 AI 的實戰洞見。And now, it's time to be the mentor for you. 23 Perspectives 訂閱。",
   metadataBase: new URL("https://danielchen23.com"),
 };
 
@@ -37,11 +35,7 @@ export default function RootLayout({
       lang="zh-Hant"
       className={`${newsreader.variable} ${figtree.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-paper text-ink">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <body className="min-h-full bg-paper text-ink">{children}</body>
     </html>
   );
 }

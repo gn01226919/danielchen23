@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
 import { ArticleCard } from "@/components/ArticleCard";
-import { articles } from "@/data/site";
+import { getContent } from "@/lib/cms/store";
 
-export const metadata: Metadata = {
-  title: "Perspectives",
-  description: "品牌、成長、AI 與現場決策。每篇都是一個視角——不是標準答案。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const c = await getContent();
+  return {
+    title: c.perspectives.title,
+    description: c.perspectives.lead,
+  };
+}
 
-export default function PerspectivesPage() {
+export default async function PerspectivesPage() {
+  const content = await getContent();
+  const articles = content.articles.filter((a) => a.published);
+
   return (
     <div className="pb-24">
       <header className="border-b border-line py-16 sm:py-20">
         <div className="container-page">
           <p className="eyebrow">Writing</p>
           <h1 className="mt-4 font-serif text-4xl text-ink sm:text-5xl">
-            Perspectives
+            {content.perspectives.title}
           </h1>
-          <p className="mt-5 max-w-xl text-muted">
-            品牌、成長、AI 與現場決策。每篇都是一個視角——不是標準答案。
-          </p>
+          <p className="mt-5 max-w-xl text-muted">{content.perspectives.lead}</p>
         </div>
       </header>
 

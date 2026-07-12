@@ -1,33 +1,36 @@
 # danielchen23.com
 
 Daniel Chen · **23 Perspectives**  
-視角型 Mentor 個人站：淺色紙感刊物 × 影像敘事 × 付費訂閱（前端先行）。
+視角型 Mentor 個人站 + CMS 後台。
 
 ## 開發
 
 ```bash
 cd /Users/danielcitybarber/gork/danielchen23
+cp .env.example .env.local   # 可改 ADMIN_PASSWORD
 npm run dev
 ```
 
-開啟 [http://localhost:3000](http://localhost:3000)
+| 位置 | 網址 |
+|------|------|
+| 前台 | http://localhost:3000 |
+| 後台 | http://localhost:3000/admin |
+| 預設密碼 | `danielchen23`（請改 `.env.local`） |
 
-## 目前狀態（前端）
+## 後台能改什麼
 
-- 首頁影像敘事、文案區塊
-- Perspectives 列表／單篇（mock 資料）
-- 免費文全文、會員文付費牆 UI
-- Subscribe 月／年方案（結帳示意，未接 Stripe）
-- About、Work with me 表單示意
+- 全站設定（站名、Mentor 金句英文／中文）
+- 首頁／About／Subscribe／Work 文案
+- 影像敘事四句
+- Perspectives 文章（發布、精選、免費／會員、內文）
 
-## 下一階段（後端）
+內容寫入 `content/site.json`（file driver）。  
+上線 Vercel 請改接 Supabase（`supabase/schema.sql` + `CMS_DRIVER=supabase`）。
 
-- Supabase：文章 CMS、會員狀態
-- Stripe：付費訂閱與 webhook
-- 真實圖片替換漸層佔位
+## 品牌金句
 
-## 定位備註
+> And now, it's time to be the mentor for you.
 
-- 角色：Mentor（分享＋放手），不是教練
-- 23 = 萌芽
-- 產品名：23 Perspectives
+## 技術
+
+Next.js 16 · TypeScript · Tailwind · CMS file store → Supabase-ready

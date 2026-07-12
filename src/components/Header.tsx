@@ -3,9 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { site } from "@/data/site";
 
-export function Header() {
+const nav = [
+  { href: "/perspectives", label: "Perspectives" },
+  { href: "/about", label: "About" },
+  { href: "/subscribe", label: "Subscribe" },
+  { href: "/work-with-me", label: "Work with me" },
+] as const;
+
+export function Header({
+  siteName,
+  mentorTagline,
+}: {
+  siteName: string;
+  mentorTagline?: string;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -14,7 +26,7 @@ export function Header() {
       <div className="container-page flex h-16 items-center justify-between gap-6">
         <Link href="/" className="group flex flex-col leading-none">
           <span className="font-serif text-lg tracking-tight text-ink">
-            {site.name}
+            {siteName}
           </span>
           <span className="mt-0.5 text-[0.65rem] tracking-[0.18em] text-muted uppercase">
             23 · Perspectives
@@ -22,7 +34,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {site.nav.map((item) => {
+          {nav.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
@@ -63,7 +75,7 @@ export function Header() {
       {open && (
         <div className="border-t border-line bg-paper md:hidden">
           <nav className="container-page flex flex-col gap-1 py-4">
-            {site.nav.map((item) => (
+            {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -73,6 +85,9 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            {mentorTagline && (
+              <p className="py-2 text-xs text-muted">{mentorTagline}</p>
+            )}
             <Link
               href="/subscribe"
               className="btn btn-primary mt-2"

@@ -2,17 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PaywallCTA } from "@/components/PaywallCTA";
-import { articles, getArticle } from "@/data/site";
+import { getContent } from "@/lib/cms/store";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }));
+  const content = await getContent();
+  return content.articles.map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const content = await getContent();
+  const article = content.articles.find((a) => a.slug === slug);
   if (!article) return { title: "Not found" };
   return {
     title: article.title,
@@ -22,10 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const content = await getContent();
+  const article = content.articles.find((a) => a.slug === slug && a.published);
   if (!article) notFound();
 
-  // 前端階段：尚未接會員狀態。free 全文；付費文顯示預覽 + 付費牆。
   const locked = !article.free;
   const visibleBody = locked ? article.body.slice(0, 2) : article.body;
 
@@ -80,6 +82,9 @@ export default async function ArticlePage({ params }: Props) {
             </h2>
             <p className="mt-4 text-muted">
               23 Perspectives 是我持續分享思想的地方。訂閱，收到下一則視角；路，還是你自己走。
+            </p>
+            <p className="mt-3 font-serif text-lg italic text-ink-soft">
+              {content.settings.mentorEnglish}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/subscribe" className="btn btn-primary">

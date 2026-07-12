@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Article } from "@/data/site";
+import type { Article } from "@/lib/cms/types";
 
 export function ArticleCard({ article }: { article: Article }) {
   return (

@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-12T05:37:07.612Z",
+  "settings": {
+    "siteName": "Daniel Chen",
+    "product": "23 Perspectives",
+    "domain": "danielchen23.com",
+    "tagline": "視角，給正在萌芽的你。",
+    "footerLine": "23 是萌芽。視角分享出去，路留給你自己走。",
+    "mentorTagline": "Mentor，引領前路",
+    "mentorEnglish": "And now, it's time to be the mentor for you."
+  },
+  "home": {
+    "heroEyebrow": "23 = 萌芽 · Mentor",
+    "heroBody": "我是 Daniel Chen。在品牌、創業與 AI 的現場裡，分享我看見的角度。\nMentor，引領前路——視角給你，衝刺留給你。",
+    "heroCtaPrimary": "訂閱 23 Perspectives",
+    "heroCtaSecondary": "讀 Perspectives",
+    "heroImageNote": "在路上寫下的\n視角筆記",
+    "statementTitle": "Mentor，引領前路。",
+    "statementBody": "無數次我想過：若有一位偉大的 mentor 為我引領前路，我衝刺的速度，定會比現在快上十倍。\n\nAnd now, it's time to be the mentor for you.\n\n分享有立場的視角，照亮你下一步——然後看你衝出去。",
+    "featuredTitle": "精選視角",
+    "featuredSubtitle": "先讀這些，感受這裡說話的方式。",
+    "aboutTitle": "在路上寫下的筆記",
+    "aboutBody": "我是連續創業家，專長品牌洞見與行銷策略；也實際經營現場、打造科技與 AI 相關事業。格鬥場上的十年給我紀律；店裡與產品裡的日常給我真實。danielchen23.com 是我分享思想的地方——為訂閱而寫，也為對的合作而開一扇門。",
+    "aboutCta": "About 完整故事",
+    "subscribeTitle": "23 Perspectives",
+    "subscribeSubtitle": "視角訂閱。分享，不綁架；點醒，不代操。",
+    "subscribePoints": [
+      "有立場的成長與品牌洞見",
+      "AI 與新工具，用「現場怎麼用」來說",
+      "跟著一位 mentor 對齊節奏——引領方向，陪你加速前行"
+    ],
+    "subscribeCta": "開始訂閱",
+    "subscribeNote": "可先讀免費文章，再決定是否訂閱。",
+    "collabTitle": "演講 · 策略合作 · 顧問",
+    "collabBody": "若你的團隊需要一個不同的視角——品牌、成長或 AI 如何進入真實工作——歡迎談合作。深度對話與策略討論，把視角帶進你的現場。",
+    "collabCta": "Work with me"
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "還在萌芽的人，才有東西可分享。",
+    "lead": "我是 Daniel Chen。23 對我來說是萌芽：不是終點的數字，是持續在長的提醒。",
+    "mentorTitle": "Mentor，引領前路",
+    "mentorParagraphs": [
+      "無數次我這樣想過：若有一位偉大的 mentor 為我引領前路，我衝刺的速度，定會比現在快上十倍。",
+      "And now, it's time to be the mentor for you.",
+      "我在品牌、創業與 AI 的現場裡，分享我怎麼看、怎麼選。視角給你對齊方向；路，仍由你大步向前。",
+      "你若想成長、想碰新工具、又希望有人走在前方照亮一段路——這裡為你而寫。"
+    ],
+    "whatTitle": "我做什麼",
+    "whatItems": [
+      "連續創業",
+      "品牌洞見與行銷策略",
+      "科技與 AI builder",
+      "現場經營（含理髮店）",
+      "格鬥十年：比賽、執法與帶人的歷練——紀律與判斷的來源"
+    ],
+    "whyTitle": "為什麼有這個站",
+    "whyParagraphs": [
+      "danielchen23.com 是思想傳遞的地方：用訂閱把視角交給願意長的人；也承接演講、策略合作與顧問。",
+      "23 Perspectives 不是課程庫。它是一段可以長期對齊的思想關係——我更新視角，你決定怎麼用。"
+    ]
+  },
+  "perspectives": {
+    "title": "Perspectives",
+    "lead": "品牌、成長、AI 與現場決策。每篇都是一個視角——帶你看見另一種可能。"
+  },
+  "subscribe": {
+    "title": "23 Perspectives",
+    "subtitle": "視角訂閱 · 給正在長的你",
+    "receiveTitle": "你會收到什麼",
+    "receiveItems": [
+      "有判斷的洞見（成長、品牌、創業現場）",
+      "AI／新工具如何進入真實工作（不是功能清單）",
+      "我正在想的事、做過的選擇——分享給你參考，路仍由你走"
+    ],
+    "rhythmTitle": "訂閱的節奏",
+    "rhythmBody": "穩定的視角更新、真實現場的判斷，以及一位願意走在前面、把光打給你的 mentor。你帶走洞見，用自己的步伐衝刺。",
+    "plansTitle": "選擇方案",
+    "planBenefits": [
+      "會員 Perspectives 全文",
+      "品牌、成長、AI 與現場決策視角",
+      "Mentor 視角——引領方向，陪你加速前行"
+    ],
+    "faq": [
+      {
+        "q": "多久更新？",
+        "a": "以穩定節奏為主，不灌水。上線後會在此標明實際頻率（例如雙週一篇主視角）。"
+      },
+      {
+        "q": "適合誰？",
+        "a": "想成長、想學新工具、想有 mentor 引領前路並加速衝刺的人。"
+      },
+      {
+        "q": "和顧問有什麼不同？",
+        "a": "訂閱是思想與視角；顧問／演講是針對你的情境深度討論。"
+      },
+      {
+        "q": "可以先讀免費的嗎？",
+        "a": "可以。Perspectives 有公開文章。"
+      }
+    ]
+  },
+  "pricing": {
+    "monthly": {
+      "name": "月訂閱",
+      "price": 320,
+      "period": "月",
+      "blurb": "隨時可停。跟著視角節奏走。"
+    },
+    "yearly": {
+      "name": "年訂閱",
+      "price": 2880,
+      "period": "年",
+      "blurb": "約兩個月免費。適合長期對齊。",
+      "badge": "建議"
+    }
+  },
+  "work": {
+    "title": "需要一個不同的視角？",
+    "lead": "演講、策略合作、顧問——給團隊或品牌一段深度對話。我帶來的是現場經驗與判斷，以及可以一起對齊的方向。",
+    "offers": [
+      {
+        "title": "演講",
+        "body": "品牌、成長、AI 進入真實工作的視角分享。"
+      },
+      {
+        "title": "策略合作",
+        "body": "品牌定位、行銷方向、成長節奏的共同推演。"
+      },
+      {
+        "title": "顧問",
+        "body": "針對你的情境，做深度策略對話與視角對齊。"
+      }
+    ],
+    "formTitle": "留下訊息",
+    "formNote": "送出後我會親自看過再回覆。",
+    "formFooter": "若你只是想先對齊思想，從訂閱 23 Perspectives 開始即可。"
+  },
+  "narrativeFrames": [
+    {
+      "id": "1",
+      "caption": "成長很少發生在舒適的地方。",
+      "tone": "warm"
+    },
+    {
+      "id": "2",
+      "caption": "我相信現場勝過投影片。",
+      "tone": "earth"
+    },
+    {
+      "id": "3",
+      "caption": "新工具不該讓人焦慮，而該成為槓桿。",
+      "tone": "cool"
+    },
+    {
+      "id": "4",
+      "caption": "你需要的或許不是答案，而是另一個視角。",
+      "tone": "ink"
+    }
+  ],
+  "articles": [
+    {
+      "id": "a1",
+      "slug": "perspective-is-not-a-course",
+      "title": "視角是加速器：為什麼我選擇做 mentor",
+      "excerpt": "資訊過載的時代，人需要的往往是一個有立場的角度——以及有人為你引領前路的那道光。",
+      "category": "成長",
+      "date": "2026-07-01",
+      "readMinutes": 6,
+      "featured": true,
+      "free": true,
+      "published": true,
+      "coverGradient": "linear-gradient(145deg, #e8e2d6 0%, #c4b8a4 48%, #8a7f6e 100%)",
+      "body": [
+        "無數次我想過：若有 mentor 引領前路，我會跑得比現在快十倍。",
+        "And now, it's time to be the mentor for you.",
+        "23 Perspectives 是一段思想關係：我更新視角，你決定怎麼用、怎麼衝。",
+        "若你正在成長、想碰新工具，又希望有人走在前方——這裡為你而寫。"
+      ]
+    },
+    {
+      "id": "a2",
+      "slug": "brand-from-the-floor",
+      "title": "從現場長出來的品牌：投影片解決不了的事",
+      "excerpt": "品牌不是一句 slogan。它發生在人怎麼被對待、錢怎麼流動、決策在壓力下長什麼樣子。",
+      "category": "品牌",
+      "date": "2026-06-18",
+      "readMinutes": 8,
+      "featured": true,
+      "free": false,
+      "published": true,
+      "coverGradient": "linear-gradient(160deg, #f0ebe3 0%, #d4c4b0 45%, #6b5e52 100%)",
+      "body": [
+        "我在現場經營裡學到的第一件事：顧客記住的，很少是你簡報上的那句話。",
+        "他們記住的是節奏——你回覆的速度、你拒絕的方式、你在忙亂時還能否保持一致。",
+        "品牌策略若只停在定位語句，會變成裝飾。真正的定位，是你在取捨時反覆證明的那條線。",
+        "（此為訂閱全文示意。接上支付後，會員可讀完整脈絡與決策筆記。）"
+      ]
+    },
+    {
+      "id": "a3",
+      "slug": "ai-as-leverage-not-identity",
+      "title": "AI 是槓桿，助你走得更遠",
+      "excerpt": "工具該縮短你從想法到現場的距離——前提是你知道自己要去哪，以及誰為你照亮下一步。",
+      "category": "AI",
+      "date": "2026-06-05",
+      "readMinutes": 7,
+      "featured": true,
+      "free": false,
+      "published": true,
+      "coverGradient": "linear-gradient(135deg, #ede8df 0%, #b8c4c0 50%, #4a5560 100%)",
+      "body": [
+        "把 AI 當槓桿，問題會變成：這週哪個真實卡關可以被縮短？",
+        "我寫工具，是為了讓品牌、經營與思考更快落地。",
+        "想學新工具的人，需要的是一條可跟的優先序，以及引領你前進的視角。"
+      ]
+    },
+    {
+      "id": "a4",
+      "slug": "discipline-outside-the-cage",
+      "title": "擂台外的紀律：十年教我如何做選擇",
+      "excerpt": "比賽與執法的經驗提醒我：標準、恢復與長期主義，在事業裡同樣適用。",
+      "category": "現場",
+      "date": "2026-05-20",
+      "readMinutes": 5,
+      "featured": false,
+      "free": true,
+      "published": true,
+      "coverGradient": "linear-gradient(150deg, #e6e0d8 0%, #a39a8e 40%, #3d3a36 100%)",
+      "body": [
+        "格鬥場上的十年給我可被驗證的紀律。",
+        "帶人與執法的歷練，讓我懂壓力下如何做清楚的判斷。",
+        "事業與成長也一樣——在平淡的日子裡繼續出現，才走得遠。"
+      ]
+    }
+  ]
+}
