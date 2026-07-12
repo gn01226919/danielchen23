@@ -73,10 +73,14 @@ export async function getMembership(): Promise<MembershipSnapshot> {
   }
 }
 
-/** 文章是否可對目前請求顯示全文（server 裁定） */
+/**
+ * 文章是否可對目前請求顯示全文（server 裁定）。
+ * 一律走 getMembership（讀 cookie），避免 free 文略過 cookie、members 文才讀
+ * 導致同一 route 靜態／動態不一致。
+ */
 export async function canReadFullArticle(free: boolean): Promise<boolean> {
-  if (free) return true;
   const m = await getMembership();
+  if (free) return true;
   return m.isMember;
 }
 

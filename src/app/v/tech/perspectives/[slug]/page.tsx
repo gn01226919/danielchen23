@@ -7,10 +7,13 @@ import { canReadFullArticle } from "@/lib/server/membership";
 type Props = { params: Promise<{ slug: string }> };
 const base = "/v/tech";
 
+/** 與主站文章頁相同：鎖文需 cookie，整頁強制動態 */
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const content = await getContent();
   return content.articles
-    .filter((a) => a.free && a.published)
+    .filter((a) => a.published)
     .map((a) => ({ slug: a.slug }));
 }
 

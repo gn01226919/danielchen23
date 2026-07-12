@@ -6,10 +6,16 @@ import { canReadFullArticle } from "@/lib/server/membership";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/**
+ * 會員文會讀 session cookie；不可在 runtime 才從 static 切 dynamic
+ * （會 500: Page changed from static to dynamic at runtime, reason: cookies）
+ */
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const content = await getContent();
   return content.articles
-    .filter((a) => a.free && a.published)
+    .filter((a) => a.published)
     .map((a) => ({ slug: a.slug }));
 }
 
