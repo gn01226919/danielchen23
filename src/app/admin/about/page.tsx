@@ -7,9 +7,13 @@ export default async function AdminAboutPage() {
   return (
     <AdminShell
       title="About 頁"
-      subtitle="Mentor 故事與肯定式文案。金句可與全站設定的英文句一致。"
+      subtitle="左側編輯 → 右側即時預覽（綠框標示落點）。"
+      wide
     >
-      <AboutForm about={content.about} />
+      <AboutForm
+        about={content.about}
+        mentorEnglish={content.settings.mentorEnglish}
+      />
     </AdminShell>
   );
 }

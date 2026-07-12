@@ -11,7 +11,11 @@ export default async function AdminEditArticlePage({ params }: Props) {
 
   if (id === "new") {
     return (
-      <AdminShell title="新增文章" subtitle="儲存後會出現在列表與前台（若已發布）。">
+      <AdminShell
+        title="新增文章"
+        subtitle="左側編輯 → 右側即時預覽。"
+        wide
+      >
         <ArticleForm
           article={{
             id: `a_${Date.now()}`,
@@ -38,7 +42,11 @@ export default async function AdminEditArticlePage({ params }: Props) {
   if (!article) notFound();
 
   return (
-    <AdminShell title="編輯文章" subtitle={article.slug}>
+    <AdminShell
+      title="編輯文章"
+      subtitle={`${article.slug} · 左側改、右側即時預覽`}
+      wide
+    >
       <ArticleForm article={article} />
     </AdminShell>
   );

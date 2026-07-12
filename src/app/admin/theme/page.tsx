@@ -7,7 +7,8 @@ export default async function AdminThemePage() {
   return (
     <AdminShell
       title="主題色／CSS"
-      subtitle="主要影響 /v/tech 科技站。改完儲存後開科技站確認。"
+      subtitle="左側改色 → 右側即時預覽落點。儲存後套用到 /v/tech。"
+      wide
     >
       <ThemeForm theme={content.themeTech} />
     </AdminShell>

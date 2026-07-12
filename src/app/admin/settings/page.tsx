@@ -7,7 +7,8 @@ export default async function AdminSettingsPage() {
   return (
     <AdminShell
       title="全站設定"
-      subtitle="站名、金句、頁尾——影響 Header / Footer / 多處引用。"
+      subtitle="左側改 → 右側即時預覽 Header／Hero／Footer 落點。"
+      wide
     >
       <SettingsForm settings={content.settings} />
     </AdminShell>

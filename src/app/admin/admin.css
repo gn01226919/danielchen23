@@ -76,6 +76,78 @@
   max-width: 920px;
 }
 
+.admin-main-wide {
+  max-width: none;
+  width: 100%;
+}
+
+/* 表單 + 即時預覽 */
+.admin-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 1100px) {
+  .admin-split {
+    grid-template-columns: minmax(300px, 1fr) minmax(360px, 1.05fr);
+  }
+}
+
+.admin-split__form {
+  min-width: 0;
+}
+
+.admin-preview-sticky {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 1.5rem);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-preview-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--admin-muted);
+  margin-bottom: 0.55rem;
+}
+
+.admin-preview-label span {
+  color: #5eead4;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-size: 0.75rem;
+}
+
+.admin-preview-frame {
+  flex: 1;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  overflow: auto;
+  background: #0a0a0a;
+  max-height: calc(100vh - 3.5rem);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-preview-hot {
+  outline: 2px solid #5eead4 !important;
+  outline-offset: 3px;
+  border-radius: 4px;
+  transition: outline 80ms ease-out;
+}
+
+.admin-field-active label {
+  color: #5eead4 !important;
+}
+
 .admin-main h1 {
   font-family: var(--font-newsreader), serif;
   font-size: 1.75rem;
