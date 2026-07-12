@@ -8,6 +8,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # danielchen23 · 專案代理規則
 
+> Claude Code 請讀同內容改寫版：**`CLAUDE.md`**（Agent 用語已改為 Claude）。  
+> 兩檔資安條款同等；產品現況以較新者為準。
+
 **專案**：Daniel Chen · 23 Perspectives（個人品牌站 + 訂閱 + CMS）  
 **路徑**：`/Users/danielcitybarber/gork/danielchen23`  
 **原則排序**：**資安 > 資料正確 > 功能 > 方便開發**
@@ -135,8 +138,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | 項目 | 內容 |
 |------|------|
 | 品牌 | Mentor 引領前路；金句：*And now, it's time to be the mentor for you.* |
-| 主站 | 紙感 `/` |
-| 科技站預覽 | `/v/tech`（完整路由） |
+| **主站** | **科技深色 UI** `/` |
+| 風格預覽 | `/v`（紙感／編輯室／混血）；`/v/tech` → `/` |
 | CMS 後台 | `/admin`（密碼 env；內容 `content/site.json` 或未來 Supabase） |
 | 寄信參考 | 組織內 **TPE Barber** 已用 **Resend**（`noreply@tpebarber.com`）；本站可同帳號另 verify `danielchen23.com`，**禁止把其 key 寫進 repo** |
 | 網域 | Namecheap 購買；DNS 建議 Cloudflare |
@@ -171,7 +174,7 @@ Supabase
 - ❌ 前端直接 `fetch('https://api.resend.com/...')`  
 - ❌ 會員全文放在 client 的 JSON 再「用 if 藏起來」  
 - ❌ Webhook 不驗簽就改訂閱狀態  
-- ❌ Commit `.env.local` 或把 key 寫進 `AGENTS.md` / README  
+- ❌ Commit `.env.local` 或把 key 寫進 `AGENTS.md` / `CLAUDE.md` / README  
 - ❌ 關閉 RLS「暫時開發用」後忘記加回並合併到 main  
 
 ---
