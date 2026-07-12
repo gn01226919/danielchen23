@@ -8,18 +8,17 @@
   --t-line: rgba(180, 200, 230, 0.12);
   --t-line-strong: rgba(180, 200, 230, 0.22);
 
-  /* 主字：近白偏冷 */
-  --t-text: #f2f5fb;
-  /* 內文：編輯器 foreground，不要太灰 */
-  --t-muted: #c2cbe0;
-  /* 次要：仍可讀的 comment 色 */
-  --t-dim: #9aa6c0;
+  /* 內文可純白；標題用淺灰／中灰（後台可改） */
+  --t-text: #ffffff;
+  --t-heading: #9ca3af;
+  --t-muted: #d1d5db;
+  --t-dim: #9ca3af;
 
   /* 程式碼語意色 */
-  --t-accent: #7ef0d8; /* keyword / cyan-green */
-  --t-accent-2: #7dd3fc; /* sky */
-  --t-string: #b8f0a8; /* string green */
-  --t-comment: #8b9bb8; /* comment */
+  --t-accent: #5eead4;
+  --t-accent-2: #7dd3fc;
+  --t-string: #86efac;
+  --t-comment: #94a3b8;
   --t-number: #f0c674;
   --t-warn: #fcd34d;
 
@@ -35,6 +34,16 @@
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
+}
+
+/* H1 / H2：淺灰～中灰（比純白深一點，層次更清楚） */
+.tech-root h1,
+.tech-root h2 {
+  color: var(--t-heading);
+}
+
+.tech-root h3 {
+  color: var(--t-heading);
 }
 
 .tech-root {
@@ -316,7 +325,7 @@
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin: 0;
-  color: var(--t-text);
+  color: var(--t-heading);
 }
 
 .tech-page-header .lead {
@@ -361,7 +370,7 @@
   letter-spacing: -0.035em;
   line-height: 1.1;
   margin: 0;
-  color: var(--t-text);
+  color: var(--t-heading);
 }
 
 .tech-hero__body {
@@ -512,7 +521,7 @@
   letter-spacing: -0.03em;
   margin: 0 0 1rem;
   line-height: 1.2;
-  color: var(--t-text);
+  color: var(--t-heading);
 }
 
 .tech-section p.lead,
@@ -579,7 +588,7 @@ a.tech-card:hover {
   letter-spacing: -0.02em;
   margin: 0 0 0.5rem;
   line-height: 1.35;
-  color: var(--t-text);
+  color: var(--t-heading);
 }
 
 .tech-card p {
@@ -639,7 +648,7 @@ a.tech-card:hover {
 .tech-cta h3 {
   margin: 0 0 0.35rem;
   font-size: 1.25rem;
-  color: var(--t-text);
+  color: var(--t-heading);
 }
 
 .tech-cta p {
@@ -824,7 +833,7 @@ a.tech-card:hover {
 .tech-paywall h3 {
   margin: 0.35rem 0 0.65rem;
   font-size: 1.35rem;
-  color: var(--t-text);
+  color: var(--t-heading);
 }
 
 .tech-paywall p {

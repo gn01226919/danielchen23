@@ -7,6 +7,7 @@ import { logoutAction } from "@/lib/cms/actions";
 const links = [
   { href: "/admin", label: "總覽", exact: true },
   { href: "/admin/settings", label: "全站設定" },
+  { href: "/admin/theme", label: "主題色／CSS" },
   { href: "/admin/home", label: "首頁文案" },
   { href: "/admin/about", label: "About" },
   { href: "/admin/frames", label: "影像敘事句" },

@@ -20,6 +20,7 @@ async function requireAdmin() {
 function revalidateAll() {
   revalidatePath("/", "layout");
   revalidatePath("/admin", "layout");
+  revalidatePath("/v/tech", "layout");
 }
 
 export async function loginAction(formData: FormData) {
@@ -127,6 +128,13 @@ export async function getContentAction() {
 export async function replaceAllContentAction(content: SiteContent) {
   await requireAdmin();
   await saveContent(content);
+  revalidateAll();
+  return { ok: true as const };
+}
+
+export async function saveThemeTechAction(data: SiteContent["themeTech"]) {
+  await requireAdmin();
+  await updateContent((c) => ({ ...c, themeTech: data }));
   revalidateAll();
   return { ok: true as const };
 }

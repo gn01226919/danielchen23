@@ -104,6 +104,27 @@ export type SiteContent = {
   };
   narrativeFrames: NarrativeFrame[];
   articles: Article[];
+  /** 科技站主題色與自訂 CSS（/v/tech） */
+  themeTech: TechTheme;
+};
+
+/** 科技版可調色票 · 後台可改 */
+export type TechTheme = {
+  bg: string;
+  bgElev: string;
+  bgSoft: string;
+  /** 內文主色（建議 #ffffff） */
+  text: string;
+  /** H1 / H2 標題色（建議淺灰／中灰） */
+  heading: string;
+  muted: string;
+  dim: string;
+  accent: string;
+  accent2: string;
+  string: string;
+  comment: string;
+  /** 附加 CSS，會注入 .tech-root 範圍（進階） */
+  customCss: string;
 };
 
 export type ContentDriver = "file" | "supabase";

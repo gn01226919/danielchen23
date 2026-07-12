@@ -239,4 +239,18 @@ export const defaultContent: SiteContent = {
       ],
     },
   ],
+  themeTech: {
+    bg: "#0b0d12",
+    bgElev: "#12151d",
+    bgSoft: "#171b26",
+    text: "#ffffff",
+    heading: "#9ca3af",
+    muted: "#d1d5db",
+    dim: "#9ca3af",
+    accent: "#5eead4",
+    accent2: "#7dd3fc",
+    string: "#86efac",
+    comment: "#94a3b8",
+    customCss: "",
+  },
 };

@@ -43,7 +43,10 @@ export default async function AdminDashboard() {
       <div className="admin-card">
         <h2>快速前往</h2>
         <div className="admin-actions" style={{ marginTop: 0 }}>
-          <Link href="/admin/about" className="admin-btn admin-btn-primary">
+          <Link href="/admin/theme" className="admin-btn admin-btn-primary">
+            主題色／CSS
+          </Link>
+          <Link href="/admin/about" className="admin-btn admin-btn-ghost">
             改 About / Mentor 文案
           </Link>
           <Link href="/admin/articles" className="admin-btn admin-btn-ghost">
