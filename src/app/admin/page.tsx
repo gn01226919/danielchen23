@@ -55,12 +55,22 @@ export default async function AdminDashboard() {
           <Link href="/" className="admin-btn admin-btn-ghost" target="_blank">
             開前台（紙感）
           </Link>
+          <Link href="/v" className="admin-btn admin-btn-ghost" target="_blank">
+            風格預覽 lab
+          </Link>
           <Link
-            href="/v/tech"
+            href="/v/hybrid"
             className="admin-btn admin-btn-ghost"
             target="_blank"
           >
-            預覽科技版
+            混血
+          </Link>
+          <Link
+            href="/v/editorial"
+            className="admin-btn admin-btn-ghost"
+            target="_blank"
+          >
+            編輯室
           </Link>
         </div>
       </div>
