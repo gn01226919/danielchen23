@@ -53,7 +53,14 @@ export default async function AdminDashboard() {
             改首頁
           </Link>
           <Link href="/" className="admin-btn admin-btn-ghost" target="_blank">
-            開前台
+            開前台（紙感）
+          </Link>
+          <Link
+            href="/v/tech"
+            className="admin-btn admin-btn-ghost"
+            target="_blank"
+          >
+            預覽科技版
           </Link>
         </div>
       </div>
