@@ -1,0 +1,34 @@
+# Supabase 專案（danielchen23）
+
+| 項目 | 值 |
+|------|-----|
+| 名稱 | `danielchen23` |
+| Reference | `tninkmlrxmnxwdgoaxqc` |
+| Region | Southeast Asia (Singapore) |
+| Dashboard | https://supabase.com/dashboard/project/tninkmlrxmnxwdgoaxqc |
+| API URL | `https://tninkmlrxmnxwdgoaxqc.supabase.co` |
+
+## 本機
+
+- `.env.local`：已寫入 URL / anon / service_role（**勿 commit**）
+- `.supabase-db-password`：資料庫密碼（**勿 commit**）
+- Schema：已執行 `supabase/schema.sql`（含 RLS）
+
+## 你還需要在 Dashboard 手動開
+
+1. **Authentication → Providers → Email**（預設通常已開）  
+2. **Authentication → Providers → Google**  
+   - 到 Google Cloud Console 建 OAuth 用戶端  
+   - 把 Client ID / Secret 貼進 Supabase  
+   - Redirect：Supabase 回調 URL（Dashboard 會顯示）  
+3. **Authentication → URL configuration**  
+   - Site URL：`http://localhost:3000`（上線後改正式網域）  
+   - Redirect URLs：  
+     - `http://localhost:3000/api/auth/callback`  
+     - `https://danielchen23.com/api/auth/callback`  
+
+## 資安
+
+- `service_role` 僅 server  
+- 所有業務表已 ENABLE RLS  
+- 見 `AGENTS.md`

@@ -19,11 +19,9 @@ export default async function AccountPage({
 
   if (!isSupabaseConfigured()) {
     return (
-      <div className="container-narrow py-20">
-        <h1 className="font-serif text-3xl">會員帳戶</h1>
-        <p className="mt-4 text-muted">
-          請先設定 Supabase（見 docs/SETUP-AUTH-STRIPE-EMAIL.md）。
-        </p>
+      <div className="tech-wrap-narrow tech-section">
+        <h1>會員帳戶</h1>
+        <p className="lead">請設定 Supabase env 後重啟 dev server。</p>
       </div>
     );
   }
@@ -34,51 +32,57 @@ export default async function AccountPage({
   }
 
   return (
-    <div className="container-narrow py-16 sm:py-24">
-      <p className="eyebrow">Account</p>
-      <h1 className="mt-4 font-serif text-4xl text-ink">會員帳戶</h1>
-
-      {sp.checkout === "success" && (
-        <p className="mt-6 border border-line bg-paper-elevated p-4 text-sm text-muted">
-          結帳流程已完成。若訂閱狀態尚未更新，請稍候幾秒後重新整理（Webhook
-          處理中）。
-        </p>
-      )}
-
-      <div className="mt-10 space-y-4 border border-line bg-paper-elevated p-6">
-        <div>
-          <p className="text-xs tracking-wide text-muted uppercase">Email</p>
-          <p className="mt-1">{m.email}</p>
+    <>
+      <header className="tech-page-header">
+        <div className="tech-wrap-narrow">
+          <p className="tech-kicker">// account</p>
+          <h1>會員帳戶</h1>
         </div>
-        <div>
-          <p className="text-xs tracking-wide text-muted uppercase">訂閱</p>
-          <p className="mt-1">
+      </header>
+      <div className="tech-wrap-narrow tech-section" style={{ borderBottom: 0 }}>
+        {sp.checkout === "success" && (
+          <div className="tech-panel" style={{ marginBottom: 24 }}>
+            <div className="tech-panel__body">
+              <div className="out">checkout completed</div>
+              <div className="dim">
+                若狀態尚未更新，請稍候重新整理（Webhook 處理中）
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="tech-card">
+          <div className="tech-card__idx">identity</div>
+          <p style={{ color: "var(--t-dim)", margin: 0 }}>Email</p>
+          <h3 style={{ marginTop: 4 }}>{m.email}</h3>
+          <p style={{ color: "var(--t-dim)", marginTop: 16 }}>訂閱</p>
+          <p style={{ color: "var(--t-text)", marginTop: 4 }}>
             {m.isMember
               ? `有效 · ${m.plan || "members"} · ${m.status}`
               : "尚未訂閱或已失效"}
           </p>
           {m.currentPeriodEnd && (
-            <p className="mt-1 text-sm text-muted">
+            <p style={{ color: "var(--t-muted)", fontSize: 14 }}>
               週期至 {new Date(m.currentPeriodEnd).toLocaleString("zh-TW")}
             </p>
           )}
         </div>
-      </div>
 
-      <div className="mt-8 flex flex-wrap gap-3">
-        {!m.isMember && (
-          <Link href="/subscribe" className="btn btn-primary">
-            訂閱 23 Perspectives
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 24 }}>
+          {!m.isMember && (
+            <Link href="/subscribe" className="tech-btn tech-btn-primary">
+              訂閱 23 Perspectives
+            </Link>
+          )}
+          <Link href="/perspectives" className="tech-btn tech-btn-ghost">
+            Perspectives
           </Link>
-        )}
-        <Link href="/perspectives" className="btn btn-ghost">
-          讀 Perspectives
-        </Link>
-        <Link href="/contact" className="btn btn-ghost">
-          給我寫信
-        </Link>
-        <SignOutButton />
+          <Link href="/contact" className="tech-btn tech-btn-ghost">
+            寫信給我
+          </Link>
+          <SignOutButton />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -4,13 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const base = "/v/tech";
-
 const nav = [
-  { href: `${base}/perspectives`, label: "Perspectives" },
-  { href: `${base}/about`, label: "About" },
-  { href: `${base}/subscribe`, label: "Subscribe" },
-  { href: `${base}/work-with-me`, label: "Work with me" },
+  { href: "/perspectives", label: "Perspectives" },
+  { href: "/about", label: "About" },
+  { href: "/subscribe", label: "Subscribe" },
+  { href: "/contact", label: "Contact" },
+  { href: "/work-with-me", label: "Work with me" },
 ] as const;
 
 export function TechHeader({
@@ -26,7 +25,7 @@ export function TechHeader({
   return (
     <header className="tech-header">
       <div className="tech-wrap tech-header__inner">
-        <Link href={base} className="tech-logo">
+        <Link href="/" className="tech-logo">
           <strong>{siteName}</strong>
           <span>23 · {product}</span>
         </Link>
@@ -45,11 +44,19 @@ export function TechHeader({
               </Link>
             );
           })}
+          <Link
+            href="/account"
+            data-active={pathname.startsWith("/account") ? "true" : "false"}
+          >
+            Account
+          </Link>
         </nav>
 
         <div className="tech-header__right">
-          <span className="tech-badge-live">tech build</span>
-          <Link href={`${base}/subscribe`} className="tech-btn tech-btn-primary">
+          <Link href="/login" className="tech-btn tech-btn-ghost">
+            登入
+          </Link>
+          <Link href="/subscribe" className="tech-btn tech-btn-primary">
             訂閱
           </Link>
           <button
@@ -74,6 +81,12 @@ export function TechHeader({
               {item.label}
             </Link>
           ))}
+          <Link href="/account" onClick={() => setOpen(false)}>
+            Account
+          </Link>
+          <Link href="/login" onClick={() => setOpen(false)}>
+            登入
+          </Link>
         </div>
       )}
     </header>
@@ -105,8 +118,8 @@ export function TechFooter({
               {item.label}
             </Link>
           ))}
-          <Link href="/">紙感主站</Link>
-          <Link href="/v">Style lab</Link>
+          <Link href="/login">登入</Link>
+          <Link href="/account">帳戶</Link>
         </div>
       </div>
     </footer>

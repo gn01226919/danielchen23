@@ -11,15 +11,19 @@ export default async function ContactPage() {
   const m = await getMembership();
 
   return (
-    <div className="container-narrow py-16 sm:py-24">
-      <p className="eyebrow">Contact</p>
-      <h1 className="mt-4 font-serif text-4xl text-ink">寫信給我</h1>
-      <p className="mt-4 max-w-xl text-muted">
-        會員或讀者的回饋、想法都可以從這裡送出。內容只會送到我的信箱與安全後端，不會出現在公開頁面。
-      </p>
-      <div className="mt-10">
+    <>
+      <header className="tech-page-header">
+        <div className="tech-wrap-narrow">
+          <p className="tech-kicker">// contact</p>
+          <h1>寫信給我</h1>
+          <p className="lead">
+            回饋與想法從這裡送出。內容只經 server 轉寄到我的信箱，不會出現在公開頁。
+          </p>
+        </div>
+      </header>
+      <div className="tech-wrap-narrow tech-section" style={{ borderBottom: 0 }}>
         <ContactForm defaultEmail={m.email || ""} />
       </div>
-    </div>
+    </>
   );
 }

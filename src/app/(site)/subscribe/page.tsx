@@ -1,81 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SubscribePlans } from "@/components/SubscribePlans";
+import { TechSubscribePlans } from "@/components/tech/TechSubscribePlans";
 import { getContent } from "@/lib/cms/store";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const c = await getContent();
-  return {
-    title: `Subscribe · ${c.settings.product}`,
-    description: c.subscribe.subtitle,
-  };
-}
+export const metadata: Metadata = { title: "Subscribe" };
 
 export default async function SubscribePage() {
   const { subscribe, pricing, settings } = await getContent();
-
+  
   return (
-    <div className="pb-24">
-      <header className="border-b border-line py-16 sm:py-20">
-        <div className="container-narrow">
-          <p className="eyebrow">Membership</p>
-          <h1 className="mt-4 font-serif text-4xl text-ink sm:text-5xl">
-            {subscribe.title}
-          </h1>
-          <p className="mt-5 text-lg text-muted">{subscribe.subtitle}</p>
-          <p className="mt-4 font-serif text-lg italic text-ink-soft">
-            {settings.mentorEnglish}
-          </p>
+    <>
+      <header className="tech-page-header">
+        <div className="tech-wrap-narrow">
+          <p className="tech-kicker">// membership</p>
+          <h1>{subscribe.title}</h1>
+          <p className="lead">{subscribe.subtitle}</p>
+          <p className="tech-quote">{settings.mentorEnglish}</p>
         </div>
       </header>
 
-      <div className="container-narrow space-y-16 py-14 sm:py-20">
-        <section>
-          <h2 className="font-serif text-2xl text-ink">{subscribe.receiveTitle}</h2>
-          <ul className="mt-6 space-y-4 text-ink-soft">
-            {subscribe.receiveItems.map((item, i) => (
-              <li
-                key={item}
-                className={
-                  i < subscribe.receiveItems.length - 1
-                    ? "border-b border-line pb-4"
-                    : "pb-1"
-                }
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
+      <div className="tech-wrap-narrow tech-section" style={{ borderBottom: 0 }}>
+        <p className="tech-section__label">{subscribe.receiveTitle}</p>
+        <ul className="tech-list">
+          {subscribe.receiveItems.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
 
-        <section>
-          <h2 className="font-serif text-2xl text-ink">{subscribe.rhythmTitle}</h2>
-          <p className="mt-5 leading-relaxed text-muted">{subscribe.rhythmBody}</p>
-        </section>
+        <div style={{ marginTop: "2.5rem" }}>
+          <p className="tech-section__label">{subscribe.rhythmTitle}</p>
+          <h2 style={{ fontSize: "1.35rem" }}>{subscribe.rhythmTitle}</h2>
+          <p className="lead">{subscribe.rhythmBody}</p>
+        </div>
 
-        <section>
-          <h2 className="mb-6 font-serif text-2xl text-ink">
+        <div style={{ marginTop: "2.5rem" }}>
+          <p className="tech-section__label">{subscribe.plansTitle}</p>
+          <h2 style={{ fontSize: "1.35rem", marginBottom: "1rem" }}>
             {subscribe.plansTitle}
           </h2>
-          <SubscribePlans
+          <TechSubscribePlans
             pricing={pricing}
             benefits={subscribe.planBenefits}
           />
-        </section>
+        </div>
 
-        <section className="border-t border-line pt-12">
-          <h2 className="font-serif text-2xl text-ink">FAQ</h2>
-          <dl className="mt-8 space-y-8">
+        <div style={{ marginTop: "2.75rem" }}>
+          <p className="tech-section__label">FAQ</p>
+          <dl className="tech-faq">
             {subscribe.faq.map((item) => (
               <div key={item.q}>
-                <dt className="font-medium text-ink">{item.q}</dt>
-                <dd className="mt-2 text-muted">
+                <dt>{item.q}</dt>
+                <dd>
                   {item.a.includes("Perspectives") ? (
                     <>
                       可以。
                       <Link
-                        href="/perspectives"
-                        className="ml-1 underline underline-offset-4"
+                        href={`/perspectives`}
+                        style={{
+                          color: "var(--t-accent-2)",
+                          textDecoration: "underline",
+                          marginLeft: 4,
+                        }}
                       >
                         Perspectives
                       </Link>{" "}
@@ -88,8 +73,8 @@ export default async function SubscribePage() {
               </div>
             ))}
           </dl>
-        </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

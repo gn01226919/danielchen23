@@ -31,69 +31,59 @@ export function ContactForm({ defaultEmail }: { defaultEmail?: string }) {
 
   if (status === "ok") {
     return (
-      <div className="border border-line bg-paper-elevated p-8">
-        <p className="font-serif text-2xl text-ink">已送出。</p>
-        <p className="mt-3 text-muted">我會親自看過。謝謝你的視角。</p>
+      <div className="tech-panel">
+        <div className="tech-panel__body">
+          <div className="out">message sent.</div>
+          <div className="dim">我會親自看過。謝謝你的視角。</div>
+        </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-lg space-y-4">
-      <div>
-        <label className="mb-1 block text-sm text-muted" htmlFor="c-name">
-          姓名（可選）
-        </label>
+    <form onSubmit={onSubmit} style={{ maxWidth: 480 }}>
+      <div className="tech-field">
+        <label htmlFor="c-name">姓名（可選）</label>
         <input
           id="c-name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full border border-line bg-paper-elevated px-4 py-3 outline-none focus:border-ink"
         />
       </div>
-      <div>
-        <label className="mb-1 block text-sm text-muted" htmlFor="c-email">
-          你的 Email
-        </label>
+      <div className="tech-field">
+        <label htmlFor="c-email">你的 Email</label>
         <input
           id="c-email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full border border-line bg-paper-elevated px-4 py-3 outline-none focus:border-ink"
         />
       </div>
-      <div>
-        <label className="mb-1 block text-sm text-muted" htmlFor="c-subject">
-          主旨（可選）
-        </label>
+      <div className="tech-field">
+        <label htmlFor="c-subject">主旨（可選）</label>
         <input
           id="c-subject"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          className="w-full border border-line bg-paper-elevated px-4 py-3 outline-none focus:border-ink"
         />
       </div>
-      <div>
-        <label className="mb-1 block text-sm text-muted" htmlFor="c-msg">
-          訊息
-        </label>
+      <div className="tech-field">
+        <label htmlFor="c-msg">訊息</label>
         <textarea
           id="c-msg"
           required
           rows={6}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="w-full resize-y border border-line bg-paper-elevated px-4 py-3 outline-none focus:border-ink"
         />
       </div>
       {status === "err" && (
-        <p className="text-sm text-[#8b4a3a]">送出失敗，請稍後再試。</p>
+        <p style={{ color: "#fca5a5", fontSize: 14 }}>送出失敗，請稍後再試。</p>
       )}
       <button
         type="submit"
-        className="btn btn-primary"
+        className="tech-btn tech-btn-primary"
         disabled={status === "sending"}
       >
         {status === "sending" ? "送出中…" : "送出"}

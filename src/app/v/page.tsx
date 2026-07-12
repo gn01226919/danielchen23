@@ -4,14 +4,14 @@ const previews = [
   {
     href: "/",
     code: "Main",
-    name: "紙感刊物（主站）",
-    desc: "暖白紙紋 · 襯線標題 · 閱讀優先。目前正式方向。",
+    name: "科技感（主站）",
+    desc: "已定案主站 · 深色網格 · 終端機 · 會員／Auth 已接 Supabase。",
   },
   {
     href: "/v/tech",
     code: "A",
-    name: "科技感（完整站）",
-    desc: "深色網格 · 終端機 · 高對比程式碼色字 · 全頁路由已 build。",
+    name: "科技感（redirect → /）",
+    desc: "舊路徑會導向主站。",
   },
   {
     href: "/v/hybrid",

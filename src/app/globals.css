@@ -41,14 +41,9 @@ html {
 }
 
 body {
-  background-color: var(--paper);
-  background-image: radial-gradient(
-    ellipse 120% 80% at 50% -10%,
-    #ffffff 0%,
-    transparent 55%
-  );
-  background-attachment: fixed;
-  color: var(--ink);
+  /* 主站已改科技版；紙感 token 仍供 /admin 等使用 */
+  background-color: #0b0d12;
+  color: #ffffff;
   font-family: var(--font-figtree), system-ui, sans-serif;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;

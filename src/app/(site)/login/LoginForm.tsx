@@ -44,9 +44,8 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
         if (error) throw error;
         window.location.href = nextPath;
       }
-    } catch (ex) {
+    } catch {
       setErr("無法完成，請檢查帳密或稍後再試。");
-      console.error(ex);
     } finally {
       setPending(false);
     }
@@ -66,24 +65,24 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
       });
       if (error) throw error;
     } catch {
-      setErr("Google 登入無法啟動，請確認已在 Supabase 開啟 Google Provider。");
+      setErr("Google 登入需在 Supabase 開啟 Google Provider。");
       setPending(false);
     }
   }
 
   return (
-    <div className="max-w-md space-y-6">
-      <div className="flex gap-2 text-sm">
+    <div className="space-y-6" style={{ maxWidth: 420 }}>
+      <div style={{ display: "flex", gap: 8 }}>
         <button
           type="button"
-          className={`btn ${mode === "login" ? "btn-primary" : "btn-ghost"}`}
+          className={`tech-btn ${mode === "login" ? "tech-btn-primary" : "tech-btn-ghost"}`}
           onClick={() => setMode("login")}
         >
           登入
         </button>
         <button
           type="button"
-          className={`btn ${mode === "signup" ? "btn-primary" : "btn-ghost"}`}
+          className={`tech-btn ${mode === "signup" ? "tech-btn-primary" : "tech-btn-ghost"}`}
           onClick={() => setMode("signup")}
         >
           新建帳戶
@@ -92,24 +91,31 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
 
       <button
         type="button"
-        className="btn btn-ghost w-full"
+        className="tech-btn tech-btn-ghost"
+        style={{ width: "100%" }}
         onClick={onGoogle}
         disabled={pending}
       >
         使用 Google 繼續
       </button>
 
-      <div className="flex items-center gap-3 text-xs text-muted">
-        <span className="h-px flex-1 bg-line" />
-        或使用 Email
-        <span className="h-px flex-1 bg-line" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          color: "var(--t-dim)",
+          fontSize: 12,
+        }}
+      >
+        <span style={{ flex: 1, height: 1, background: "var(--t-line)" }} />
+        Email
+        <span style={{ flex: 1, height: 1, background: "var(--t-line)" }} />
       </div>
 
-      <form onSubmit={onEmailSubmit} className="space-y-4">
-        <div>
-          <label className="mb-1 block text-sm text-muted" htmlFor="email">
-            Email
-          </label>
+      <form onSubmit={onEmailSubmit}>
+        <div className="tech-field">
+          <label htmlFor="email">Email</label>
           <input
             id="email"
             type="email"
@@ -117,13 +123,10 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-line bg-paper-elevated px-4 py-3 outline-none focus:border-ink"
           />
         </div>
-        <div>
-          <label className="mb-1 block text-sm text-muted" htmlFor="password">
-            密碼
-          </label>
+        <div className="tech-field">
+          <label htmlFor="password">密碼</label>
           <input
             id="password"
             type="password"
@@ -134,12 +137,16 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
             }
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-line bg-paper-elevated px-4 py-3 outline-none focus:border-ink"
           />
         </div>
-        {err && <p className="text-sm text-[#8b4a3a]">{err}</p>}
-        {msg && <p className="text-sm text-muted">{msg}</p>}
-        <button type="submit" className="btn btn-primary w-full" disabled={pending}>
+        {err && <p style={{ color: "#fca5a5", fontSize: 14 }}>{err}</p>}
+        {msg && <p style={{ color: "var(--t-muted)", fontSize: 14 }}>{msg}</p>}
+        <button
+          type="submit"
+          className="tech-btn tech-btn-primary"
+          style={{ width: "100%" }}
+          disabled={pending}
+        >
           {pending ? "處理中…" : mode === "signup" ? "建立帳戶" : "登入"}
         </button>
       </form>

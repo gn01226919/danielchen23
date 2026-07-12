@@ -1,167 +1,210 @@
 import Link from "next/link";
-import { ArticleCard } from "@/components/ArticleCard";
 import { getContent } from "@/lib/cms/store";
 
 export default async function HomePage() {
   const content = await getContent();
-  const { home, settings, narrativeFrames } = content;
-  const featured = content.articles.filter((a) => a.featured && a.published);
+  const { settings, home, narrativeFrames } = content;
+  const featured = content.articles
+    .filter((a) => a.featured && a.published)
+    .slice(0, 3);
 
   return (
     <>
-      <section className="border-b border-line">
-        <div className="container-page grid gap-12 py-20 lg:grid-cols-12 lg:gap-10 lg:py-28">
-          <div className="lg:col-span-7">
-            <p className="eyebrow rise">{home.heroEyebrow}</p>
-            <h1 className="mt-5 font-serif text-[clamp(2.4rem,5.5vw,3.85rem)] text-ink rise rise-delay-1">
-              {settings.tagline}
-            </h1>
-            <p className="mt-7 max-w-xl whitespace-pre-line text-base leading-relaxed text-muted sm:text-lg rise rise-delay-2">
-              {home.heroBody}
+      <section className="tech-hero">
+        <div className="tech-wrap tech-hero__grid">
+          <div>
+            <p className="tech-kicker">
+              <span>//</span> {home.heroEyebrow}
             </p>
-            <p className="mt-5 font-serif text-lg italic text-ink-soft rise rise-delay-2">
-              {settings.mentorEnglish}
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3 rise rise-delay-3">
-              <Link href="/subscribe" className="btn btn-primary">
+            <h1>{settings.tagline}</h1>
+            <p className="tech-hero__body">{home.heroBody}</p>
+            <p className="tech-quote">{settings.mentorEnglish}</p>
+            <div className="tech-hero__actions">
+              <Link href={`/subscribe`} className="tech-btn tech-btn-primary">
                 {home.heroCtaPrimary}
               </Link>
-              <Link href="/perspectives" className="btn btn-ghost">
+              <Link
+                href={`/perspectives`}
+                className="tech-btn tech-btn-ghost"
+              >
                 {home.heroCtaSecondary}
               </Link>
             </div>
           </div>
-          <div className="lg:col-span-5">
-            <div
-              className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[3/4] lg:h-full lg:min-h-[420px] lg:aspect-auto"
-              style={{
-                background:
-                  "linear-gradient(155deg, #efe8dc 0%, #c9b8a0 38%, #7a6a58 72%, #2f2c29 100%)",
-              }}
-            >
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <p className="whitespace-pre-line font-serif text-2xl leading-snug text-paper sm:text-3xl">
-                  {home.heroImageNote}
-                </p>
+
+          <div className="tech-panel" aria-hidden>
+            <div className="tech-panel__bar">
+              <span className="tech-panel__dot" />
+              <span className="tech-panel__dot" />
+              <span className="tech-panel__dot" />
+              <span className="tech-panel__title">mentor.session — zsh</span>
+            </div>
+            <div className="tech-panel__body">
+              <div>
+                <span className="dim">$</span>{" "}
+                <span className="cmd">whoami</span>
+              </div>
+              <div className="out">{settings.siteName} · mentor</div>
+              <div style={{ height: "0.55rem" }} />
+              <div>
+                <span className="dim">$</span>{" "}
+                <span className="cmd">cat ./mission.md</span>
+              </div>
+              <div className="out">{settings.mentorTagline}</div>
+              <div className="dim"># lead the path · share perspective</div>
+              <div style={{ height: "0.55rem" }} />
+              <div>
+                <span className="dim">$</span>{" "}
+                <span className="cmd">echo $MANTRA</span>
+              </div>
+              <div className="kw">{settings.mentorEnglish}</div>
+              <div style={{ height: "0.55rem" }} />
+              <div>
+                <span className="dim">$</span>{" "}
+                <span className="cmd">./grow --with-ai --from-field</span>
+              </div>
+              <div className="out">✓ brand · growth · leverage</div>
+              <div>
+                <span className="dim">$</span> <span className="cmd">_</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-line py-20 sm:py-24">
-        <div className="container-narrow text-center">
-          <h2 className="font-serif text-3xl text-ink sm:text-4xl">
-            {home.statementTitle}
-          </h2>
-          <p className="mt-8 whitespace-pre-line text-base leading-relaxed text-muted sm:text-lg">
+      <div className="tech-stats">
+        <div className="tech-stat">
+          <div className="tech-stat__label">Role</div>
+          <div className="tech-stat__value">Mentor</div>
+        </div>
+        <div className="tech-stat">
+          <div className="tech-stat__label">Product</div>
+          <div className="tech-stat__value">23 Perspectives</div>
+        </div>
+        <div className="tech-stat">
+          <div className="tech-stat__label">Focus</div>
+          <div className="tech-stat__value">Brand × AI</div>
+        </div>
+        <div className="tech-stat">
+          <div className="tech-stat__label">Signal</div>
+          <div className="tech-stat__value">Field notes</div>
+        </div>
+      </div>
+
+      <section className="tech-section">
+        <div className="tech-wrap-narrow" style={{ textAlign: "center" }}>
+          <p className="tech-section__label">Statement</p>
+          <h2>{home.statementTitle}</h2>
+          <p className="lead" style={{ marginInline: "auto" }}>
             {home.statementBody}
           </p>
         </div>
       </section>
 
-      <section className="border-b border-line">
-        <div className="grid sm:grid-cols-2">
-          {narrativeFrames.map((frame) => (
-            <div
-              key={frame.id}
-              className={`frame-panel tone-${frame.tone} border-b border-line sm:border-r sm:even:border-r-0`}
-            >
-              <p className="frame-caption">{frame.caption}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-line py-20 sm:py-24">
-        <div className="container-page">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <p className="eyebrow">Perspectives</p>
-              <h2 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">
-                {home.featuredTitle}
-              </h2>
-              <p className="mt-3 max-w-md text-muted">{home.featuredSubtitle}</p>
-            </div>
-            <Link
-              href="/perspectives"
-              className="text-sm text-ink-soft underline-offset-4 hover:underline"
-            >
-              看全部 Perspectives
-            </Link>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {featured.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
+      <section className="tech-section">
+        <div className="tech-wrap">
+          <p className="tech-section__label">Signals</p>
+          <h2>視角模組 · 四則現場訊號</h2>
+          <p className="lead">現場洞見，編成可掃的資訊卡。</p>
+          <div className="tech-bento">
+            {narrativeFrames.map((frame, i) => (
+              <div className="tech-card" key={frame.id}>
+                <div className="tech-card__idx">
+                  0{i + 1} / {frame.tone}
+                </div>
+                <h3>{frame.caption}</h3>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-b border-line py-20 sm:py-24">
-        <div className="container-page grid gap-12 lg:grid-cols-12 lg:items-center">
+      <section className="tech-section">
+        <div className="tech-wrap">
           <div
-            className="aspect-[5/4] lg:col-span-5"
             style={{
-              background:
-                "linear-gradient(140deg, #e8e2d6 0%, #a89884 50%, #4a433c 100%)",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+              gap: "1rem",
+              alignItems: "end",
             }}
-            aria-hidden
-          />
-          <div className="lg:col-span-6 lg:col-start-7">
-            <p className="eyebrow">About</p>
-            <h2 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">
-              {home.aboutTitle}
-            </h2>
-            <p className="mt-6 leading-relaxed text-muted">{home.aboutBody}</p>
-            <Link href="/about" className="btn btn-ghost mt-8">
+          >
+            <div>
+              <p className="tech-section__label">Perspectives</p>
+              <h2>{home.featuredTitle}</h2>
+              <p className="lead">{home.featuredSubtitle}</p>
+            </div>
+            <Link
+              href={`/perspectives`}
+              className="tech-btn tech-btn-ghost"
+            >
+              全部文章 →
+            </Link>
+          </div>
+          <div className="tech-bento">
+            {featured.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/perspectives/${article.slug}`}
+                className="tech-card"
+              >
+                <div className="tech-card__idx">{article.date}</div>
+                <h3>{article.title}</h3>
+                <p>{article.excerpt}</p>
+                <div className="tech-card-meta">
+                  <span className="tech-chip">{article.category}</span>
+                  <span
+                    className={
+                      article.free ? "tech-chip" : "tech-chip tech-chip-accent"
+                    }
+                  >
+                    {article.free ? "free" : "members"}
+                  </span>
+                  <span className="tech-chip">{article.readMinutes} min</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="tech-section">
+        <div className="tech-wrap">
+          <p className="tech-section__label">About</p>
+          <h2>{home.aboutTitle}</h2>
+          <p className="lead">{home.aboutBody}</p>
+          <div style={{ marginTop: "1.25rem" }}>
+            <Link href={`/about`} className="tech-btn tech-btn-ghost">
               {home.aboutCta}
             </Link>
           </div>
-        </div>
-      </section>
 
-      <section className="border-b border-line py-20 sm:py-24">
-        <div className="container-narrow text-center">
-          <p className="eyebrow">Membership</p>
-          <h2 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">
-            {home.subscribeTitle}
-          </h2>
-          <p className="mt-4 text-muted">{home.subscribeSubtitle}</p>
-          <ul className="mx-auto mt-10 max-w-md space-y-3 text-left text-sm text-ink-soft sm:text-base">
-            {home.subscribePoints.map((p, i) => (
-              <li
-                key={p}
-                className={
-                  i < home.subscribePoints.length - 1
-                    ? "border-b border-line pb-3"
-                    : "pb-1"
-                }
-              >
-                {p}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link href="/subscribe" className="btn btn-primary">
+          <div className="tech-cta">
+            <div>
+              <h2>{home.subscribeTitle}</h2>
+              <p>{home.subscribeSubtitle}</p>
+            </div>
+            <Link
+              href={`/subscribe`}
+              className="tech-btn tech-btn-primary"
+            >
               {home.subscribeCta}
             </Link>
           </div>
-          <p className="mt-4 text-xs text-muted">{home.subscribeNote}</p>
-        </div>
-      </section>
 
-      <section className="py-20 sm:py-24">
-        <div className="container-page flex flex-col items-start justify-between gap-8 border border-line bg-paper-elevated p-8 sm:flex-row sm:items-center sm:p-12">
-          <div className="max-w-xl">
-            <h2 className="font-serif text-2xl text-ink sm:text-3xl">
-              {home.collabTitle}
-            </h2>
-            <p className="mt-4 text-muted">{home.collabBody}</p>
+          <div className="tech-cta" style={{ marginTop: "0.75rem" }}>
+            <div>
+              <h2>{home.collabTitle}</h2>
+              <p>{home.collabBody}</p>
+            </div>
+            <Link
+              href={`/work-with-me`}
+              className="tech-btn tech-btn-ghost"
+            >
+              {home.collabCta}
+            </Link>
           </div>
-          <Link href="/work-with-me" className="btn btn-ghost shrink-0">
-            {home.collabCta}
-          </Link>
         </div>
       </section>
     </>

@@ -1,41 +1,36 @@
 import type { Metadata } from "next";
-import { ArticleCard } from "@/components/ArticleCard";
+import Link from "next/link";
 import { getContent } from "@/lib/cms/store";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const c = await getContent();
-  return {
-    title: c.perspectives.title,
-    description: c.perspectives.lead,
-  };
-}
+export const metadata: Metadata = { title: "Perspectives" };
 
 export default async function PerspectivesPage() {
   const content = await getContent();
   const articles = content.articles.filter((a) => a.published);
-
+  
   return (
-    <div className="pb-24">
-      <header className="border-b border-line py-16 sm:py-20">
-        <div className="container-page">
-          <p className="eyebrow">Writing</p>
-          <h1 className="mt-4 font-serif text-4xl text-ink sm:text-5xl">
-            {content.perspectives.title}
-          </h1>
-          <p className="mt-5 max-w-xl text-muted">{content.perspectives.lead}</p>
+    <>
+      <header className="tech-page-header">
+        <div className="tech-wrap">
+          <p className="tech-kicker">// writing</p>
+          <h1>{content.perspectives.title}</h1>
+          <p className="lead">{content.perspectives.lead}</p>
         </div>
       </header>
 
-      <div className="container-page mt-12">
-        <div className="mb-10 flex flex-wrap gap-2 text-sm">
-          {["全部", "成長", "品牌", "AI", "現場"].map((tag) => (
+      <div className="tech-wrap tech-section" style={{ borderBottom: 0 }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.45rem",
+            marginBottom: "1.5rem",
+          }}
+        >
+          {["全部", "成長", "品牌", "AI", "現場"].map((tag, i) => (
             <span
               key={tag}
-              className={`border px-3 py-1.5 ${
-                tag === "全部"
-                  ? "border-ink bg-ink text-paper"
-                  : "border-line text-muted"
-              }`}
+              className={i === 0 ? "tech-chip tech-chip-accent" : "tech-chip"}
             >
               {tag}
             </span>
@@ -43,15 +38,34 @@ export default async function PerspectivesPage() {
         </div>
 
         {articles.length === 0 ? (
-          <p className="text-muted">第一篇視角準備中。先訂閱，發布時會通知你。</p>
+          <p className="lead">尚無文章。</p>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="tech-bento tech-bento-3">
             {articles.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
+              <Link
+                key={article.slug}
+                href={`/perspectives/${article.slug}`}
+                className="tech-card"
+              >
+                <div className="tech-card__idx">{article.date}</div>
+                <h3>{article.title}</h3>
+                <p>{article.excerpt}</p>
+                <div className="tech-card-meta">
+                  <span className="tech-chip">{article.category}</span>
+                  <span
+                    className={
+                      article.free ? "tech-chip" : "tech-chip tech-chip-accent"
+                    }
+                  >
+                    {article.free ? "free" : "members"}
+                  </span>
+                  <span className="tech-chip">{article.readMinutes} min</span>
+                </div>
+              </Link>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
