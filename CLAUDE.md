@@ -144,9 +144,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | CMS 後台 | `/admin`（密碼 env；內容 `content/site.json` 或未來 Supabase） |
 | 寄信參考 | 組織內 **TPE Barber** 已用 **Resend**（`noreply@tpebarber.com`）；本站可同帳號另 verify `danielchen23.com`，**禁止把其 key 寫進 repo** |
 | 網域 | https://danielchen23.com（Namecheap → Cloudflare → Vercel） |
+| **託管（長期）** | **方案 A：Vercel + Supabase**（2026-07-15 定案）。不以 Cloudways 取代整包 |
 | 金流 | Stripe（secret 僅 server；骨架已有，金鑰待接） |
 | 登入目標 | Email 註冊／登入 + **Google 登入** |
-| Supabase | 專案 `danielchen23` · ref `tninkmlrxmnxwdgoaxqc` · Singapore · schema + RLS 已套 |
+| Supabase | 專案 `danielchen23` · ref `tninkmlrxmnxwdgoaxqc` · Singapore · schema + RLS 已套；**CMS／Storage 待接線**（解線上 `/admin` 可寫） |
 | 文章頁 | `perspectives/[slug]` 必須 `force-dynamic`（鎖文讀 cookie，不可 static→dynamic 500） |
 
 ---

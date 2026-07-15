@@ -142,9 +142,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | 風格預覽 | `/v`（紙感／編輯室／混血）；`/v/tech` → `/` |
 | CMS 後台 | `/admin`（密碼 env；內容 `content/site.json` 或未來 Supabase） |
 | 寄信參考 | 組織內 **TPE Barber** 已用 **Resend**（`noreply@tpebarber.com`）；本站可同帳號另 verify `danielchen23.com`，**禁止把其 key 寫進 repo** |
-| 網域 | Namecheap 購買；DNS 建議 Cloudflare |
+| 網域 | https://danielchen23.com（Namecheap → Cloudflare → Vercel） |
+| **託管（長期）** | **方案 A：Vercel + Supabase**（2026-07-15）。不以 Cloudways 取代整包 |
 | 金流 | Stripe（secret 僅 server） |
 | 登入目標 | Email 註冊／登入 + **Google 登入** |
+| CMS | 正式站寫入走 Supabase（file `site.json` 僅本機／建置）；Storage 管圖 |
 
 ---
 
