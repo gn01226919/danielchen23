@@ -8,9 +8,9 @@ const MAX_AGE = 60 * 60 * 24 * 7;
 
 function secret() {
   return (
-    process.env.ADMIN_SECRET ||
-    process.env.ADMIN_PASSWORD ||
-    "dev-only-change-me-danielchen23"
+    process.env.ADMIN_SECRET?.trim() ||
+    process.env.ADMIN_PASSWORD?.trim() ||
+    "unsigned-dev-session"
   );
 }
 

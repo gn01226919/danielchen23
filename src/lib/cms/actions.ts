@@ -30,7 +30,7 @@ export async function loginAction(formData: FormData) {
     return {
       ok: false as const,
       error:
-        "伺服器未設定 ADMIN_PASSWORD（Production）。請在 Vercel Environment Variables 設定後重新部署。",
+        "伺服器未設定 ADMIN_PASSWORD。本機請寫入 .env.local；正式站請在 Vercel Environment Variables 設定後重新部署。",
     };
   }
   if (!verifyPassword(password)) {

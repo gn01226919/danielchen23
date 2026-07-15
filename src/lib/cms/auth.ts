@@ -1,3 +1,5 @@
+import "server-only";
+
 import { cookies } from "next/headers";
 import { createHash, createHmac, timingSafeEqual } from "crypto";
 
@@ -8,35 +10,24 @@ function secret() {
   const s =
     process.env.ADMIN_SECRET?.trim() ||
     process.env.ADMIN_PASSWORD?.trim() ||
-    "dev-only-change-me-danielchen23";
-  return s;
+    "";
+  return s || "unsigned-dev-session";
 }
 
 function sign(value: string) {
   return createHmac("sha256", secret()).update(value).digest("hex");
 }
 
-function isProdRuntime() {
-  return (
-    process.env.VERCEL_ENV === "production" ||
-    process.env.NODE_ENV === "production"
-  );
-}
-
 /**
  * 正規化：去頭尾空白（Vercel 貼上常帶換行）。
- * Production：禁止硬編碼 fallback，避免「以為改了 env、其實還在用舊預設」。
- * 本機開發：未設時才 fallback `danielchen23`。
+ * 無硬編碼預設密碼；必須在 .env.local / Vercel 設定 ADMIN_PASSWORD。
  */
 export function getAdminPassword() {
   const raw = process.env.ADMIN_PASSWORD;
   if (raw != null && String(raw).trim() !== "") {
     return String(raw).trim();
   }
-  if (isProdRuntime()) {
-    return "";
-  }
-  return "danielchen23";
+  return "";
 }
 
 /** 正式站是否已設定管理密碼（不回傳密碼本身） */

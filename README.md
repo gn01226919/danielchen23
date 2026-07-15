@@ -7,7 +7,7 @@ Daniel Chen · **23 Perspectives**
 
 ```bash
 cd /Users/danielcitybarber/gork/danielchen23
-cp .env.example .env.local   # 可改 ADMIN_PASSWORD
+cp .env.example .env.local   # 必填 ADMIN_PASSWORD（無預設密碼）
 npm run dev
 ```
 
@@ -15,7 +15,7 @@ npm run dev
 |------|------|
 | 前台 | http://localhost:3000 |
 | 後台 | http://localhost:3000/admin |
-| 預設密碼 | `danielchen23`（請改 `.env.local`） |
+| 後台密碼 | 僅 `.env.local` / Vercel `ADMIN_PASSWORD`（不上前端、無開發預設） |
 
 ## 後台能改什麼
 
