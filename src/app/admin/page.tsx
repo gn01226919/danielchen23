@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { AdminShell } from "@/components/admin/AdminShell";
-import { getContent, contentFilePath } from "@/lib/cms/store";
+import {
+  contentStorageLabel,
+  getCmsDriver,
+  getContent,
+} from "@/lib/cms/store";
 
 export default async function AdminDashboard() {
   const content = await getContent();
+  const driver = getCmsDriver();
   const published = content.articles.filter((a) => a.published).length;
   const members = content.articles.filter((a) => !a.free).length;
 
@@ -35,7 +40,7 @@ export default async function AdminDashboard() {
               wordBreak: "break-all",
             }}
           >
-            儲存位置：{contentFilePath()}
+            驅動：{driver} · 儲存：{contentStorageLabel()}
           </p>
         </div>
       </div>
@@ -90,12 +95,19 @@ export default async function AdminDashboard() {
           }}
         >
           <li>
-            現在：<strong style={{ color: "var(--admin-text)" }}>file driver</strong>
-            — 寫入 <code>content/site.json</code>（本機開發穩定）
+            現在：
+            <strong style={{ color: "var(--admin-text)" }}>
+              {driver} driver
+            </strong>
+            —{" "}
+            {driver === "supabase"
+              ? "寫入 Supabase site_content（正式站可持久）"
+              : "寫入 content/site.json（僅本機可寫碟）"}
           </li>
           <li>
-            上線 Vercel：改接 Supabase（見 <code>supabase/schema.sql</code>
-            ），設 <code>CMS_DRIVER=supabase</code>
+            長期方案 A：Vercel + Supabase；
+            <code>CMS_DRIVER=supabase</code> +{" "}
+            <code>SUPABASE_SERVICE_ROLE_KEY</code>（僅 server）
           </li>
           <li>
             密碼：環境變數 <code>ADMIN_PASSWORD</code> +{" "}

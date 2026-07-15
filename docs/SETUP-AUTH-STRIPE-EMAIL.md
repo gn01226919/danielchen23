@@ -28,6 +28,13 @@
    - Google（OAuth Client ID / Secret 只放 Supabase 後台）  
 4. Authentication → URL configuration：  
    - Site URL：`https://danielchen23.com`（本機可暫時 `http://localhost:3000`）  
+
+### CMS（內容後台 · 方案 A）
+
+- 表：`site_content`（見 `supabase/schema.sql`）  
+- Vercel：`CMS_DRIVER=supabase` + `SUPABASE_SERVICE_ROLE_KEY`  
+- 種子／驗證：`npm run cms:seed` · `npm run cms:verify`  
+- 詳見 `docs/SUPABASE-PROJECT.md`  
    - Redirect：`http://localhost:3000/api/auth/callback`、`https://danielchen23.com/api/auth/callback`  
 5. env：
 
