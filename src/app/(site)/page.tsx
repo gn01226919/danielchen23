@@ -1,5 +1,20 @@
 import Link from "next/link";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getContent } from "@/lib/cms/store";
+import { buildPageMetadata, homeJsonLd } from "@/lib/seo";
+
+const homeMeta = buildPageMetadata({
+  title: "Daniel Chen · 23 Perspectives",
+  description:
+    "視角型 Mentor。品牌、成長與 AI 的現場洞見。23 Perspectives 訂閱——點亮方向，路留給你。",
+  path: "/",
+});
+
+export const metadata = {
+  ...homeMeta,
+  // 避免 template 變成「… · Daniel Chen · Daniel Chen」
+  title: { absolute: "Daniel Chen · 23 Perspectives" },
+};
 
 export default async function HomePage() {
   const content = await getContent();
@@ -10,6 +25,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd data={homeJsonLd()} />
       <section className="tech-hero">
         <div className="tech-wrap tech-hero__grid">
           <div>

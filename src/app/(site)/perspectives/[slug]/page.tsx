@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getContent } from "@/lib/cms/store";
+import { articleJsonLd, articleMetadata } from "@/lib/seo";
 import { canReadFullArticle } from "@/lib/server/membership";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -22,8 +24,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const content = await getContent();
-  const article = content.articles.find((a) => a.slug === slug);
-  return { title: article?.title ?? "Not found" };
+  const article = content.articles.find((a) => a.slug === slug && a.published);
+  if (!article) {
+    return { title: "Not found", robots: { index: false, follow: false } };
+  }
+  return articleMetadata(article);
 }
 
 export default async function ArticlePage({ params }: Props) {
@@ -35,9 +40,11 @@ export default async function ArticlePage({ params }: Props) {
   const allowed = await canReadFullArticle(article.free);
   const locked = !allowed;
   const visible = locked ? article.body.slice(0, 2) : article.body;
+  const previewForJsonLd = (locked ? visible : article.body).join("\n\n");
 
   return (
     <article>
+      <JsonLd data={articleJsonLd(article, previewForJsonLd)} />
       <div
         className="tech-cover"
         style={{ background: article.coverGradient }}

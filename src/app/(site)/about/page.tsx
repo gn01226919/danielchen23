@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { getContent } from "@/lib/cms/store";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata = buildPageMetadata({
+  title: "About",
+  description:
+    "Daniel Chen — 萌芽、Mentor 與現場。品牌洞見、創業與 AI，在路上寫下的筆記。",
+  path: "/about",
+});
 
 export default async function AboutPage() {
   const { about, settings } = await getContent();

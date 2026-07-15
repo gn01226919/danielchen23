@@ -1,9 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { TechSubscribePlans } from "@/components/tech/TechSubscribePlans";
 import { getContent } from "@/lib/cms/store";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Subscribe" };
+export const metadata = buildPageMetadata({
+  title: "Subscribe",
+  description:
+    "訂閱 23 Perspectives——有立場的成長、品牌與 AI 視角。Mentor 引領前路，路仍由你走。",
+  path: "/subscribe",
+});
 
 export default async function SubscribePage() {
   const { subscribe, pricing, settings } = await getContent();

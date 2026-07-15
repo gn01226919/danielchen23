@@ -1,8 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { getContent } from "@/lib/cms/store";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Perspectives" };
+export const metadata = buildPageMetadata({
+  title: "Perspectives",
+  description:
+    "品牌、成長、AI 與現場決策。每篇都是一個視角——Daniel Chen · 23 Perspectives。",
+  path: "/perspectives",
+});
 
 export default async function PerspectivesPage() {
   const content = await getContent();

@@ -1,9 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { TechWorkForm } from "@/components/tech/TechWorkForm";
 import { getContent } from "@/lib/cms/store";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Work with me" };
+export const metadata = buildPageMetadata({
+  title: "Work with me",
+  description:
+    "演講、策略合作與顧問。需要不同視角時，與 Daniel Chen 一起把洞見帶進現場。",
+  path: "/work-with-me",
+});
 
 export default async function WorkWithMePage() {
   const { work } = await getContent();

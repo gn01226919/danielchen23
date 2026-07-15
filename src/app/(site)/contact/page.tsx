@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { ContactForm } from "./ContactForm";
 import { getMembership } from "@/lib/server/membership";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "聯絡／回饋",
   description: "寫信給 Daniel — 回饋與想法。",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const m = await getMembership();
