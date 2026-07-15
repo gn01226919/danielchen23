@@ -1,23 +1,28 @@
 import { cookies } from "next/headers";
-import { createHmac, timingSafeEqual } from "crypto";
+import { createHash, createHmac, timingSafeEqual } from "crypto";
 
 const COOKIE = "dc23_admin_session";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
 function secret() {
-  return (
-    process.env.ADMIN_SECRET ||
-    process.env.ADMIN_PASSWORD ||
-    "dev-only-change-me-danielchen23"
-  );
+  const s =
+    process.env.ADMIN_SECRET?.trim() ||
+    process.env.ADMIN_PASSWORD?.trim() ||
+    "dev-only-change-me-danielchen23";
+  return s;
 }
 
 function sign(value: string) {
   return createHmac("sha256", secret()).update(value).digest("hex");
 }
 
+/** 正規化：去頭尾空白（Vercel 貼上常帶換行） */
 export function getAdminPassword() {
-  return process.env.ADMIN_PASSWORD || "danielchen23";
+  const raw = process.env.ADMIN_PASSWORD;
+  if (raw != null && String(raw).trim() !== "") {
+    return String(raw).trim();
+  }
+  return "danielchen23";
 }
 
 export async function createAdminSession() {
@@ -62,12 +67,16 @@ export async function isAdminAuthenticated(): Promise<boolean> {
 
 export function verifyPassword(input: string) {
   const expected = getAdminPassword();
+  // 先 hash 再比，避免「長度不同直接 false」與計時旁路
+  const a = createHash("sha256")
+    .update(String(input ?? "").normalize("NFC").trim(), "utf8")
+    .digest();
+  const b = createHash("sha256")
+    .update(String(expected).normalize("NFC").trim(), "utf8")
+    .digest();
   try {
-    const a = Buffer.from(input);
-    const b = Buffer.from(expected);
-    if (a.length !== b.length) return false;
     return timingSafeEqual(a, b);
   } catch {
-    return input === expected;
+    return false;
   }
 }
