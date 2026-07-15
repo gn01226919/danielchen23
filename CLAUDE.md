@@ -147,7 +147,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | **託管（長期）** | **方案 A：Vercel + Supabase**（2026-07-15 定案）。不以 Cloudways 取代整包 |
 | 金流 | Stripe（secret 僅 server；骨架已有，金鑰待接） |
 | 登入目標 | Email 註冊／登入 + **Google 登入** |
-| Supabase | 專案 `danielchen23` · ref `tninkmlrxmnxwdgoaxqc` · Singapore · schema + RLS 已套；**CMS／Storage 待接線**（解線上 `/admin` 可寫） |
+| Supabase | 專案 `danielchen23` · ref `tninkmlrxmnxwdgoaxqc` · Singapore · schema + RLS 已套；**CMS `site_content` 已接**（`CMS_DRIVER=supabase`）；Storage 圖片仍待做 |
 | 文章頁 | `perspectives/[slug]` 必須 `force-dynamic`（鎖文讀 cookie，不可 static→dynamic 500） |
 
 ---
