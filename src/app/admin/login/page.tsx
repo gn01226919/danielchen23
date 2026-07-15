@@ -23,9 +23,10 @@ export default async function AdminLoginPage() {
             lineHeight: 1.5,
           }}
         >
-          開發預設密碼見 <code>.env.example</code> 的{" "}
-          <code>ADMIN_PASSWORD</code>（未設定時為{" "}
-          <code>danielchen23</code>）。上線務必改掉。
+          密碼設在 Vercel / <code>.env.local</code> 的{" "}
+          <code>ADMIN_PASSWORD</code>（僅 server）。正式站改完後需重新部署。
+          本機未設定時開發預設為 <code>danielchen23</code>；Production
+          不會使用此預設。
         </p>
       </div>
     </div>

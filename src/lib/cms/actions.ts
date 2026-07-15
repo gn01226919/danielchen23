@@ -6,6 +6,7 @@ import {
   clearAdminSession,
   createAdminSession,
   isAdminAuthenticated,
+  isAdminPasswordConfigured,
   verifyPassword,
 } from "./auth";
 import { getContent, saveContent, updateContent } from "./store";
@@ -25,6 +26,13 @@ function revalidateAll() {
 
 export async function loginAction(formData: FormData) {
   const password = String(formData.get("password") || "");
+  if (!isAdminPasswordConfigured()) {
+    return {
+      ok: false as const,
+      error:
+        "伺服器未設定 ADMIN_PASSWORD（Production）。請在 Vercel Environment Variables 設定後重新部署。",
+    };
+  }
   if (!verifyPassword(password)) {
     return { ok: false as const, error: "密碼不正確" };
   }

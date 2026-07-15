@@ -16,13 +16,32 @@ function sign(value: string) {
   return createHmac("sha256", secret()).update(value).digest("hex");
 }
 
-/** 正規化：去頭尾空白（Vercel 貼上常帶換行） */
+function isProdRuntime() {
+  return (
+    process.env.VERCEL_ENV === "production" ||
+    process.env.NODE_ENV === "production"
+  );
+}
+
+/**
+ * 正規化：去頭尾空白（Vercel 貼上常帶換行）。
+ * Production：禁止硬編碼 fallback，避免「以為改了 env、其實還在用舊預設」。
+ * 本機開發：未設時才 fallback `danielchen23`。
+ */
 export function getAdminPassword() {
   const raw = process.env.ADMIN_PASSWORD;
   if (raw != null && String(raw).trim() !== "") {
     return String(raw).trim();
   }
+  if (isProdRuntime()) {
+    return "";
+  }
   return "danielchen23";
+}
+
+/** 正式站是否已設定管理密碼（不回傳密碼本身） */
+export function isAdminPasswordConfigured() {
+  return getAdminPassword().length > 0;
 }
 
 export async function createAdminSession() {
@@ -67,6 +86,7 @@ export async function isAdminAuthenticated(): Promise<boolean> {
 
 export function verifyPassword(input: string) {
   const expected = getAdminPassword();
+  if (!expected) return false;
   // 先 hash 再比，避免「長度不同直接 false」與計時旁路
   const a = createHash("sha256")
     .update(String(input ?? "").normalize("NFC").trim(), "utf8")
