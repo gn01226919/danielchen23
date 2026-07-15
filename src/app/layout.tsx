@@ -60,6 +60,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Google Search Console HTML 標籤驗證（Vercel / .env 設 GOOGLE_SITE_VERIFICATION=內容值）
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({
